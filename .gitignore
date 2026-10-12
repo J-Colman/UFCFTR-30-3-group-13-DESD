@@ -1,0 +1,140 @@
+# =====================================================================
+# Bristol Regional Food Network – Digital Marketplace
+# UFCFTR-30-3 Distributed and Enterprise Software Development
+#
+# DO NOT ignore modelling artefacts. These are assessed deliverables,
+# and their commit history is evidence of individual contribution:
+#   *.bpmn  *.dmn  *.form  *.drawio  i* model exports (*.json / *.txt / *.svg / *.png)
+# =====================================================================
+
+
+# ---------------------------------------------------------------------
+# Secrets and environment config (never commit, not even sandbox keys)
+# ---------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+local_settings.py
+settings_local.py
+
+
+# ---------------------------------------------------------------------
+# Python / Django / DRF
+# ---------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Local databases and uploads
+db.sqlite3
+db.sqlite3-journal
+*.sqlite3
+media/
+staticfiles/
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.mypy_cache/
+.ruff_cache/
+
+# Logs
+*.log
+logs/
+
+
+# ---------------------------------------------------------------------
+# Camunda
+# ---------------------------------------------------------------------
+# Downloaded Camunda Run / Modeler distributions (large binaries;
+# document the version in the README instead)
+camunda-bpm-run-*/
+camunda-modeler-*/
+*.zip
+*.tar.gz
+
+# Camunda's embedded H2 database files
+*.mv.db
+*.trace.db
+*.h2.db
+
+# Java build output (if you use a Spring Boot / Maven / Gradle Camunda project)
+target/
+.gradle/
+out/
+*.class
+.mvn/wrapper/maven-wrapper.jar
+!gradle/wrapper/gradle-wrapper.jar
+
+
+# ---------------------------------------------------------------------
+# Docker
+# ---------------------------------------------------------------------
+docker-compose.override.yml
+compose.override.yml
+# Bind-mounted volume data (Postgres, Camunda, etc.)
+data/
+volumes/
+pgdata/
+
+
+# ---------------------------------------------------------------------
+# Node (only relevant if you add a JS frontend)
+# ---------------------------------------------------------------------
+node_modules/
+npm-debug.log*
+yarn-error.log*
+.next/
+.parcel-cache/
+
+
+# ---------------------------------------------------------------------
+# Modelling and document tool temp files (NOT the models themselves)
+# ---------------------------------------------------------------------
+# draw.io desktop backup and temp files
+*.bkp
+*.dtmp
+.$*
+
+# Office lock files (sprint review slides, backlog spreadsheets)
+~$*
+
+
+# ---------------------------------------------------------------------
+# IDEs and editors
+# ---------------------------------------------------------------------
+.idea/
+*.iml
+.vscode/*
+!.vscode/extensions.json
+*.swp
+*.swo
+*~
+
+
+# ---------------------------------------------------------------------
+# Operating system files
+# ---------------------------------------------------------------------
+.DS_Store
+._*
+Thumbs.db
+ehthumbs.db
+desktop.ini
