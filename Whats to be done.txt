@@ -1,0 +1,16 @@
+A — Lead / Integration	Repo setup, README, folder structure, board, contribution-matrix draft; coordinates the strategic BPMN so it aligns to stakeholders
+B — Business analyst	Stakeholder register + major process inventory + FR/NFR skeleton (feeds backlog)
+C — Strategic BPMN modeller	Draft the strategic BPMN (highest-weight item); gets it reviewed
+D — Product owner / planning	Product backlog (user stories + acceptance criteria + MoSCoW) and the sprint plan/delegation
+
+Five person Team, yet to be assigned
+
+WHAT NEEDS TO BE DONE
+
+Repo live (DONE) — shared GitHub/GitLab, README, folder structure; every member has committed something (repo evidence = 20% of this sprint).
+Stakeholder analysis — Producers (varying tech skill), Customers (3 segments), Network Admin, plus external orgs (payment sandbox, organic-certification verification, delivery/collection).
+Strategic-level BPMN ( ADA )— one high-level model: major processes, org functions/responsibilities, key actors, external orgs, interactions. High abstraction only — no lane-level detail. (50% item.)
+Major process list — e.g. product listing/inventory, order+checkout+payment, traceability/incident, payouts/commission, notifications.
+Two candidate functionalities scoped + agreed with the module team.
+Initial product backlog — user stories with acceptance criteria, MoSCoW, traceable to stakeholders.
+Sprint plan — tasks split and delegated to all 5 on a board (GitHub Projects / Jira / Trello).
