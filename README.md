@@ -81,8 +81,9 @@ UFCFTR-30-3-group-13-DESD/
 ## Project Management
 
 - [Kanban Board](https://github.com/users/J-Colman/projects/4)
-- [Gantt Chart](https://github.com/J-Colman/UFCFTR-30-3-group-13-DESD/blob/main/docs/planning/task-1-gantt-chart.pdf)
+- [Gantt Chart](https://github.com/J-Colman/UFCFTR-30-3-group-13-DESD/blob/main/docs/planning/GANTT%20CHART.png)
 - [Sprint Plan](https://github.com/J-Colman/UFCFTR-30-3-group-13-DESD/blob/main/docs/planning/sprint-1-week-1-plan.md)
+- [MoSCoW Prioritisation](https://github.com/J-Colman/UFCFTR-30-3-group-13-DESD/blob/main/docs/planning/MOSCOW%20PRIORITISATION.png)
 
 ---
 
