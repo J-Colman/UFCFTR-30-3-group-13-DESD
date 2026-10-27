@@ -15,4 +15,4 @@
 | **7** | Product Traceability & Safety Data | Should Have | Enhances the catalog (Rank 1): Displays additional details like harvest dates and allergen warnings. (required) | 
 | **8** | Consolidated Delivery Synchronization | Should Have | Built on top of basic logistics (Rank 5): Calculates a single delivery window based on the 48-hour minimum lead time across multiple farms. | 
 | **9** | Postcode-based "Food Miles" | Could Have | Extra sustainability feature: Added to the checkout flow only after the core payment routing (Rank 3) is stable. | 
-| **10** | Dynamic Surplus Integration | Could Have | Complex case for waste reduction: Requires active orders in the system before being able to offer discounts to customers for unbought produce. | 
+| **10** | Dynamic Surplus Integration | Could Have | Complex case for waste reduction: Requires the core catalog (Rank 1) and checkout routing (Rank 3) to be fully stable. We can then introduce time-triggered pricing modifiers to the catalog without disrupting standard sales. | 
