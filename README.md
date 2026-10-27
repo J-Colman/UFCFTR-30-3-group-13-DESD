@@ -65,15 +65,15 @@ UFCFTR-30-3-group-13-DESD/
 | Case 2 Operational BPMN | Ada | [docs/models/operational-bpmn-use-case-2.bpmn](docs/models/operational-bpmn-use-case-2.bpmn) | Committed |
 | Case 2 Operational BPMN Image | Ada | [docs/models/operational-bpmn-use-case-2.png](docs/models/operational-bpmn-use-case-2.png) | Committed |
 | Sequence Diagram | Yonas | [docs/models/sequence-diagram.pdf](docs/models/sequence-diagram.pdf) | Committed |
-| Task 1 Gantt Chart | Aman | [docs/planning/task-1-gantt-chart.pdf](docs/planning/GANTT%20CHART.png) | Committed |
+| Task 1 Gantt Chart | Aman | [docs/planning/gantt-chart.pdf](docs/planning/GANTT%20CHART.png) | Committed |
 | Sprint 1 Plan | Joshua | [docs/planning/sprint-1-week-1-plan.md](docs/planning/sprint-1-week-1-plan.md) | Committed |
-| Sprint 1 MoSCow Prioritisation | Aman | [docs/planning/sprint-1-week-1-plan.md](docs/planning/MOSCOW%20PRIORITISATION.png) | Committed |
-| Sprint 1 Sprint Checklist | Aman | [docs/planning/sprint-1-week-1-plan.md](docs/planning/SPRINT%20CHECKLIST.png) | Committed |
+| Sprint 1 MoSCow Prioritisation | Aman | [docs/planning/moscow-prioritization.png](docs/planning/MOSCOW%20PRIORITISATION.png) | Committed |
+| Sprint 1 Sprint Checklist | Aman | [docs/planning/sprint-checklist](docs/planning/SPRINT%20CHECKLIST.png) | Committed |
 | README | Joshua | [README.md](README.md) | Committed |
 | Sprint 1 Kanban | Joshua | [GitHub Project](https://github.com/users/J-Colman/projects/4) | Public, linked to repo, 11 items |
 | Strategic BPMN | Ada | `docs/models/strategic-bpmn.bpmn` not yet in repo | Pending #4 |
 | Major Process List | Yonas | `docs/analysis/major-process-list.md` | Pending #5 |
-| Product Backlog | Aman | `docs/planning/product_backlog.md` | Committed |
+| Product Backlog | Aman | [docs/planning/product_backlog.md](docs/planning/Product_Backlog.md) | Committed |
 | Contribution Matrix Draft | Joshua | `docs/contribution-matrix/contribution-matrix-sprint-1-draft.docx` | Pending #9 |
 | Traceability Table | Joshua | `docs/analysis/traceability.md` | Pending #10, blocked by #4 |
 | Functionality Confirmation | Joshua | `docs/planning/scope.md` | Pending #11 |
