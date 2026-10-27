@@ -73,7 +73,7 @@ UFCFTR-30-3-group-13-DESD/
 | Sprint 1 Kanban | Joshua | [GitHub Project](https://github.com/users/J-Colman/projects/4) | Public, linked to repo, 11 items |
 | Strategic BPMN | Ada | `docs/models/strategic-bpmn.bpmn` not yet in repo | Pending #4 |
 | Major Process List | Yonas | `docs/analysis/major-process-list.md` | Pending #5 |
-| Product Backlog | Aman | `docs/planning/product-backlog.md` | Pending #6 |
+| Product Backlog | Aman | `docs/planning/product_backlog.md` | Committed |
 | Contribution Matrix Draft | Joshua | `docs/contribution-matrix/contribution-matrix-sprint-1-draft.docx` | Pending #9 |
 | Traceability Table | Joshua | `docs/analysis/traceability.md` | Pending #10, blocked by #4 |
 | Functionality Confirmation | Joshua | `docs/planning/scope.md` | Pending #11 |
