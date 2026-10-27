@@ -67,7 +67,7 @@ UFCFTR-30-3-group-13-DESD/
 | Sequence Diagram | Yonas | [docs/models/sequence-diagram.pdf](docs/models/sequence-diagram.pdf) | Committed |
 | Task 1 Gantt Chart | Aman | [docs/planning/gantt-chart.pdf](docs/planning/GANTT%20CHART.png) | Committed |
 | Sprint 1 Plan | Joshua | [docs/planning/sprint-1-week-1-plan.md](docs/planning/sprint-1-week-1-plan.md) | Committed |
-| Sprint 1 MoSCow Prioritisation | Aman | [docs/planning/moscow-prioritization.png](docs/planning/MOSCOW%20PRIORITISATION.png) | Committed |
+| Sprint 1 MoSCow Prioritisation | Aman | [docs/planning/moscow-prioritization.png](docs/planning/Moscow_Prioritization.md) | Committed |
 | Sprint 1 Sprint Checklist | Aman | [docs/planning/sprint-checklist](docs/planning/SPRINT%20CHECKLIST.png) | Committed |
 | README | Joshua | [README.md](README.md) | Committed |
 | Sprint 1 Kanban | Joshua | [GitHub Project](https://github.com/users/J-Colman/projects/4) | Public, linked to repo, 11 items |
