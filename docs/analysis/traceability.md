@@ -99,7 +99,7 @@ These are descriptive placeholders. Replace them with Ada's actual strategic pro
 - Backlog source: `docs/planning/Master_Backlog.md` (currently no `R` IDs; add them to make this table auditable).
 - Scope source: `docs/planning/scope.md`.
 - Stakeholder source: `docs/analysis/stakeholder-analysis.docx`.
-- i* source: `docs/models/iSR model-case-2.json` and the two exported diagrams.
+- i* source: `docs/models/case-2-i-star-sr-model.json` and the two exported diagrams (`case-2-i-star-sd-model.png`, `case-2-i-star-sr-model.png`).
 
 ## 5. Review checklist
 
