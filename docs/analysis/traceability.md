@@ -95,15 +95,15 @@ These are descriptive placeholders. Replace them with Ada's actual strategic pro
 ## 4. Evidence notes
 
 - Strategic BPMN source: `docs/models/strategic-bpmn.bpmn` (draft export). Participant IDs above are from that file.
-- Operational BPMN source: `docs/models/operational-bpmn-use-case-2.bpmn` (draft; known gateway issues).
-- Backlog source: `docs/planning/Master_Backlog.md` (currently no `R` IDs; add them to make this table auditable).
+- Operational BPMN source: `docs/models/case-2-operational-bpmn.bpmn` (draft; known gateway issues).
+- Backlog source: `docs/planning/master-backlog.md` (currently no `R` IDs; add them to make this table auditable).
 - Scope source: `docs/planning/scope.md`.
 - Stakeholder source: `docs/analysis/stakeholder-analysis.docx`.
 - i* source: `docs/models/case-2-i-star-sr-model.json` and the two exported diagrams (`case-2-i-star-sd-model.png`, `case-2-i-star-sr-model.png`).
 
 ## 5. Review checklist
 
-- [ ] Add `R1`–`R11` IDs to `Master_Backlog.md`.
+- [ ] Add `R1`–`R11` IDs to `master-backlog.md`.
 - [ ] Replace `SP-ORD`/`SP-PAY` placeholders with Ada’s final strategic process names.
 - [ ] Add the missing producer-notification backlog item.
 - [ ] Decide the fate of `R6` partial-order failure.

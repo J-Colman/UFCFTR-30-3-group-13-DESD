@@ -4,7 +4,7 @@
 
 The Bristol Regional Food Network is a community digital marketplace connecting around 40 local food producers with consumers within 20 miles of Bristol, helping small producers reach customers beyond farmers’ markets and farm-gate sales. It lets producers list seasonal products and manage availability, while customers browse by category, place single or multi-vendor orders, and check out through a sandbox payment service, with traceability, food-miles reporting and surplus-produce features.
 
-## The Team - Group 13
+## The Team — Group 13
 
 | Name | GitHub Handle | Role |
 | --- | --- | --- |
@@ -18,13 +18,20 @@ The Bristol Regional Food Network is a community digital marketplace connecting 
 
 ## Case 2 — Customer Multi-Vendor Order, Checkout and Payment
 
-Two major functionalities: TBC - pending confirmation with the module team (#11)
+Chosen use case: **Case 2**.
+
+The two major functionalities are confirmed with the module team (Dr Khoa Phung, 26 October 2026):
+
+- **F1 — Multi-vendor order assembly, stock validation and checkout**
+- **F2 — Payment, 5% commission and producer notification**
+
+Both functionalities are scoped from Case 2. See [docs/planning/scope.md](docs/planning/scope.md) for the boundaries and assumptions.
 
 ---
 
 ## Repository Structure
 
-```
+```text
 UFCFTR-30-3-group-13-DESD/
 ├── README.md
 ├── pyproject.toml
@@ -32,22 +39,35 @@ UFCFTR-30-3-group-13-DESD/
 ├── .python-version
 ├── .gitignore
 └── docs/
+    ├── analysis/
+    │   ├── stakeholder-analysis.docx
+    │   └── traceability.md
     ├── assessment/
     │   ├── assessment-brief-task-1.pdf
     │   ├── case-study.pdf
-    │   ├── task-1-use-cases.pdf
-    │   └── contributions-matrix-template.docx
-    ├── analysis/
-    │   ├── stakeholder-analysis.docx
-    │   └── case-2-use-case-diagram.pdf
+    │   ├── contributions-matrix-template.docx
+    │   └── task-1-use-cases.pdf
     ├── models/
-    │   ├── operational-bpmn-use-case-2.bpmn
-    │   ├── operational-bpmn-use-case-2.png
-    │   └── sequence-diagram.pdf
-    ├── planning/
-    │   ├── sprint-1-week-1-plan.md
-    │   └── task-1-gantt-chart.pdf
-    └── contribution-matrix/
+    │   ├── strategic-bpmn.bpmn
+    │   ├── strategic-bpmn.png
+    │   ├── case-2-use-case-diagram.pdf
+    │   ├── case-2-class-diagram.pdf
+    │   ├── case-2-component-diagram.pdf
+    │   ├── case-2-sequence-diagram.pdf
+    │   ├── case-2-i-star-sd-model.png
+    │   ├── case-2-i-star-sr-model.png
+    │   ├── case-2-i-star-sr-model.json
+    │   ├── case-2-operational-bpmn.bpmn
+    │   └── case-2-operational-bpmn.png
+    └── planning/
+        ├── gantt-chart.pdf
+        ├── gantt-chart.png
+        ├── master-backlog.md
+        ├── moscow-prioritisation.md
+        ├── product-backlog.md
+        ├── scope.md
+        ├── sprint-1-checklist.png
+        └── sprint-1-week-1-plan.md
 ```
 
 ---
@@ -61,31 +81,41 @@ UFCFTR-30-3-group-13-DESD/
 | Task 1 Use Cases | Module team | [docs/assessment/task-1-use-cases.pdf](docs/assessment/task-1-use-cases.pdf) | Reference copy committed |
 | Contribution Matrix Template | Module team | [docs/assessment/contributions-matrix-template.docx](docs/assessment/contributions-matrix-template.docx) | Reference copy committed |
 | Stakeholder Analysis | Izzy | [docs/analysis/stakeholder-analysis.docx](docs/analysis/stakeholder-analysis.docx) | Committed |
-| Case 2 Use Case Diagram | Yonas | [docs/analysis/case-2-use-case-diagram.pdf](docs/analysis/case-2-use-case-diagram.pdf) | Committed |
-| Case 2 Operational BPMN | Ada | [docs/models/operational-bpmn-use-case-2.bpmn](docs/models/operational-bpmn-use-case-2.bpmn) | Committed |
-| Case 2 Operational BPMN Image | Ada | [docs/models/operational-bpmn-use-case-2.png](docs/models/operational-bpmn-use-case-2.png) | Committed |
-| Sequence Diagram | Yonas | [docs/models/sequence-diagram.pdf](docs/models/sequence-diagram.pdf) | Committed |
-| Task 1 Gantt Chart | Aman | [docs/planning/gantt-chart.pdf](docs/planning/GANTT%20CHART.png) | Committed |
-| Sprint 1 Plan | Joshua | [docs/planning/sprint-1-week-1-plan.md](docs/planning/sprint-1-week-1-plan.md) | Committed |
-| Sprint 1 MoSCow Prioritisation | Aman | [docs/planning/moscow-prioritization.png](docs/planning/Moscow_Prioritization.md) | Committed |
-| Sprint 1 Sprint Checklist | Aman | [docs/planning/sprint-checklist](docs/planning/SPRINT%20CHECKLIST.png) | Committed |
-| README | Joshua | [README.md](README.md) | Committed |
-| Sprint 1 Kanban | Joshua | [GitHub Project](https://github.com/users/J-Colman/projects/4) | Public, linked to repo, 11 items |
-| Strategic BPMN | Ada | `docs/models/strategic-bpmn.bpmn` not yet in repo | Pending #4 |
+| Traceability Matrix | Joshua | [docs/analysis/traceability.md](docs/analysis/traceability.md) | Draft committed (#10) |
+| FR/NFR Analysis | Izzy | `docs/analysis/requirements.md` | Pending #12 |
 | Major Process List | Yonas | `docs/analysis/major-process-list.md` | Pending #5 |
-| Product Backlog | Aman | [docs/planning/product_backlog.md](docs/planning/Product_Backlog.md) | Committed |
+| Strategic BPMN | Ada | [docs/models/strategic-bpmn.bpmn](docs/models/strategic-bpmn.bpmn) | Draft committed (#4); gaps in traceability |
+| Strategic BPMN Image | Ada | [docs/models/strategic-bpmn.png](docs/models/strategic-bpmn.png) | Draft committed |
+| Case 2 Use Case Diagram | Yonas | [docs/models/case-2-use-case-diagram.pdf](docs/models/case-2-use-case-diagram.pdf) | Committed |
+| Case 2 Class Diagram | Yonas | [docs/models/case-2-class-diagram.pdf](docs/models/case-2-class-diagram.pdf) | Committed |
+| Case 2 Component Diagram | Yonas | [docs/models/case-2-component-diagram.pdf](docs/models/case-2-component-diagram.pdf) | Committed |
+| Case 2 Sequence Diagram | Yonas | [docs/models/case-2-sequence-diagram.pdf](docs/models/case-2-sequence-diagram.pdf) | Committed |
+| i* SD Model | Yonas | [docs/models/case-2-i-star-sd-model.png](docs/models/case-2-i-star-sd-model.png) | WIP committed; Sprint 2 summative |
+| i* SR Model | Yonas | [docs/models/case-2-i-star-sr-model.png](docs/models/case-2-i-star-sr-model.png) | WIP committed; Sprint 2 summative |
+| i* SR piStar Source | Yonas | [docs/models/case-2-i-star-sr-model.json](docs/models/case-2-i-star-sr-model.json) | Committed |
+| Case 2 Operational BPMN | Ada | [docs/models/case-2-operational-bpmn.bpmn](docs/models/case-2-operational-bpmn.bpmn) | Draft committed; gateway fixes in Sprint 2 |
+| Case 2 Operational BPMN Image | Ada | [docs/models/case-2-operational-bpmn.png](docs/models/case-2-operational-bpmn.png) | Draft committed |
+| Scope and Functionality Confirmation | Joshua | [docs/planning/scope.md](docs/planning/scope.md) | Confirmed (#11) |
+| Master Backlog | Aman | [docs/planning/master-backlog.md](docs/planning/master-backlog.md) | Committed; canonical backlog |
+| Product Backlog | Aman | [docs/planning/product-backlog.md](docs/planning/product-backlog.md) | Committed; legacy view |
+| MoSCoW Prioritisation | Aman | [docs/planning/moscow-prioritisation.md](docs/planning/moscow-prioritisation.md) | Committed |
+| Sprint 1 Plan | Joshua | [docs/planning/sprint-1-week-1-plan.md](docs/planning/sprint-1-week-1-plan.md) | Committed |
+| Gantt Chart | Aman | [docs/planning/gantt-chart.png](docs/planning/gantt-chart.png) | Committed |
+| Sprint 1 Checklist | Aman | [docs/planning/sprint-1-checklist.png](docs/planning/sprint-1-checklist.png) | Committed |
 | Contribution Matrix Draft | Joshua | `docs/contribution-matrix/contribution-matrix-sprint-1-draft.docx` | Pending #9 |
-| Traceability Table | Joshua | `docs/analysis/traceability.md` | Pending #10, blocked by #4 |
-| Functionality Confirmation | Joshua | `docs/planning/scope.md` | Pending #11 |
+| Sprint 1 Kanban | Joshua | [GitHub Project](https://github.com/users/J-Colman/projects/4) | Public, linked to repo, 12 items |
+| README | Joshua | [README.md](README.md) | Committed |
 
 ---
 
 ## Project Management
 
 - [Kanban Board](https://github.com/users/J-Colman/projects/4)
-- [Gantt Chart](https://github.com/J-Colman/UFCFTR-30-3-group-13-DESD/blob/main/docs/planning/GANTT%20CHART.png)
-- [Sprint Plan](https://github.com/J-Colman/UFCFTR-30-3-group-13-DESD/blob/main/docs/planning/sprint-1-week-1-plan.md)
-- [MoSCoW Prioritisation](https://github.com/J-Colman/UFCFTR-30-3-group-13-DESD/blob/main/docs/planning/MOSCOW%20PRIORITISATION.png)
+- [Scope and Functionality Confirmation](docs/planning/scope.md)
+- [Traceability Matrix](docs/analysis/traceability.md)
+- [Gantt Chart](docs/planning/gantt-chart.png)
+- [Sprint 1 Plan](docs/planning/sprint-1-week-1-plan.md)
+- [MoSCoW Prioritisation](docs/planning/moscow-prioritisation.md)
 
 ---
 
@@ -137,4 +167,3 @@ uv run <command>             # run a command inside the environment
 ## Academic Integrity Note
 
 No AI-generated BPMN or i* diagrams. AI may be used for code only if usage is disclosed and understood. Work must be the group’s own, don’t share with other groups.
-

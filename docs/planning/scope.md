@@ -58,7 +58,7 @@ Interpretation:
 **Stakeholders:** Customers, producers, delivery/collection.
 
 **Strategic process:** `SP-ORD (TBC — align to strategic BPMN)`
-**Operational model:** `docs/models/operational-bpmn-use-case-2.bpmn` (draft)
+**Operational model:** `docs/models/case-2-operational-bpmn.bpmn` (draft)
 **Backlog items:** `R1`, `R2`, `R3`, `R5`
 **Acceptance basis:**
 - A customer can add products from two or more producers to one basket.
@@ -94,7 +94,7 @@ Interpretation:
 **Stakeholders:** Customers, producers, payment sandbox, network admin.
 
 **Strategic process:** `SP-PAY (TBC — align to strategic BPMN)`
-**Operational model:** `docs/models/operational-bpmn-use-case-2.bpmn` (draft. gateway fixes required in Sprint 2)
+**Operational model:** `docs/models/case-2-operational-bpmn.bpmn` (draft; gateway fixes required in Sprint 2)
 **Backlog items:** `R3`, `R4`, plus a new backlog item for producer notification (currently a gap)
 **Acceptance basis:**
 - A sandbox payment accepted by the payment service confirms the order, updates stock and notifies the relevant producers.
