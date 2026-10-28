@@ -58,39 +58,39 @@ These are descriptive placeholders. Replace them with Ada's actual strategic pro
 
 ## 2. Traceability matrix
 
-| # | Stakeholder need | Strategic process | Functionality | Operational step (element ID and label) | Backlog item | Status / evidence |
-|---|---|---|---|---|---|---|
-| T1 | Customer can find products and build a multi-vendor basket | SP-ORD: Customer `Process_1az2jql` — `Activity_0n7z413` “Browse for Products”; `Activity_1ljogur` “Choose Collection or Delivery” | F1 | `Activity_0rr2lt4` “Customer adds stock to basket” → `Activity_0ndn96p` “customer goes to checkout” | R1, R2 | Partial — strategic model has browse but no basket/checkout detail |
-| T2 | Customer is told when an item is unavailable and can amend the basket | SP-ORD — no explicit stock-check process in strategic model | F1 | `Gateway_1qgl4sy` “is stock available?”; `Activity_1xfn19p` “inform customer that stock is no longer available”; `Activity_0qz3viy` “check producers involved” | R2, R3 | Gap in strategic model; covered in operational draft |
-| T3 | Customer knows the delivery/collection arrangement per producer | SP-ORD: Delivery/collection `Process_1ay8z2p` — `Activity_18voaud` “Delivers orders”; collection path is incorrectly labelled “Moves Collections from the Depot to Stores” | F1 | `Activity_06e8i07` “determine delivery / collection”; `Activity_1qsbbl2` “customer reviews order” | R5 | Partial — delivery exists, collection/BRFN wording is wrong, per-producer detail missing |
-| T4 | Customer pays once for a multi-vendor order | SP-PAY: Payment sandbox `Process_0vmeexz` — `Activity_1vyq53b` “Processes Payment”; Customer `Activity_0ieui19` “Pay for Order” | F2 | `Activity_0ao6m0r` “payment submitted to external payment service”; `Gateway_0rfi80j` “is payment accepted” | R3 | Partial — strategic model has payment, but no multi-vendor split or order confirmation |
-| T5 | Customer can retry after a declined or unavailable payment | SP-PAY — no retry path in strategic model | F2 | `Activity_1gma2lm` “retry payment”; `Gateway_12tjvls` “does customer want to retry”; `Activity_1lnt4wn` “release stock”; `Activity_1o2bvfq` “inform customer and give option to retry” | R3 | Gap in strategic model; operational path is partial (no default flow/timeout) |
-| T6 | Producer is notified in time to prepare the order (48-hour lead time) | SP-ORD/SP-PAY — no producer-notification process in strategic model; `Process_08z95qh` only “Produce food for supply” | F2 | `Activity_1vwfzpc` “notify producers” | GAP — no backlog item | Gap in strategic model and backlog; operational task exists |
-| T7 | Producer receives the correct amount after the 5% commission | SP-PAY — no commission/settlement process in strategic model | F2 | `Activity_1fg0pe2` “calculate commission” | R4 | Gap in strategic model; operational task exists |
-| T8 | Network receives its 5% commission | SP-PAY — no commission process in strategic model | F2 | `Activity_1fg0pe2` “calculate commission” | R4 | Gap in strategic model; operational task exists |
-| T9 | Order is split into producer-specific order elements | SP-ORD — no explicit split in strategic model | F1 | `Activity_1dnmvp0` “create overall marketplace order”; `Gateway_0aaetje` “are there multiple vendors in order” | R2, R3, R5 | Gap in strategic model; operational split occurs after payment/notification — sequence needs review |
-| T10 | One producer rejects their portion; customer receives the rest and a partial refund | SP-ORD/SP-PAY — no exception path modelled | F2 (deferred exception) | GAP — no boundary error event in operational BPMN | R6 | Gap — scope currently defers R6; downgrade or add exception path |
-| T11 | Customer/producer can trace a food-quality incident to affected orders | SP-QUAL — not modelled | Out of F1/F2 | N/A | R7 | Out of scope for the two Case 2 functionalities; future/strategic |
-| T12 | Consolidated delivery windows across producers | SP-ORD — not modelled | Out of F1/F2 | N/A | R8 | Future/Should; not required for F1/F2 core |
-| T13 | Customer can contact a producer about quality/safety | SP-QUAL — not modelled | Out of F1/F2 | N/A | R9 | Out of scope for the two Case 2 functionalities |
-| T14 | Customer can see food miles | SP-CAT/SP-ORD — not modelled | Out of F1/F2 | N/A | R10 | Future/Could |
-| T15 | Customer can buy discounted surplus produce | SP-CAT — not modelled | Out of F1/F2 | N/A | R11 | Future/Could |
-| T16 | Producer organic certification is verified | SP-CERT: `Process_1fttwi9` — `Activity_0vtdrcs` “Certify Organics” | Out of F1/F2 | N/A | R7 (supporting product data) | Strategic model only; belongs to Case 1 / future |
+| # | Stakeholder need | Strategic process | Functionality | Operational step (element ID and label) | Backlog item | Status | Evidence |
+|---|---|---|---|---|---|---|---|
+| T1 | Customer can find products and build a multi-vendor basket | SP-ORD: Customer `Process_1az2jql` — `Activity_0n7z413` “Browse for Products”; `Activity_1ljogur` “Choose Collection or Delivery” | F1 | `Activity_0rr2lt4` “Customer adds stock to basket” → `Activity_0ndn96p` “customer goes to checkout” | R1, R2 | Partial | Strategic model has browse but no basket/checkout detail |
+| T2 | Customer is told when an item is unavailable and can amend the basket | SP-ORD — no explicit stock-check process in strategic model | F1 | `Gateway_1qgl4sy` “is stock available?”; `Activity_1xfn19p` “inform customer that stock is no longer available”; `Activity_0qz3viy` “check producers involved” | R2, R3 | Partial | No strategic stock-check process; operational draft covers it |
+| T3 | Customer knows the delivery/collection arrangement per producer | SP-ORD: Delivery/collection `Process_1ay8z2p` — `Activity_18voaud` “Delivers orders”; collection path is incorrectly labelled “Moves Collections from the Depot to Stores” | F1 | `Activity_06e8i07` “determine delivery / collection”; `Activity_1qsbbl2` “customer reviews order” | R5 | Partial | Delivery exists, collection/BRFN wording is wrong, per-producer detail missing |
+| T4 | Customer pays once for a multi-vendor order | SP-PAY: Payment sandbox `Process_0vmeexz` — `Activity_1vyq53b` “Processes Payment”; Customer `Activity_0ieui19` “Pay for Order” | F2 | `Activity_0ao6m0r` “payment submitted to external payment service”; `Gateway_0rfi80j` “is payment accepted” | R3 | Partial | Strategic model has payment, but no multi-vendor split or order confirmation |
+| T5 | Customer can retry after a declined or unavailable payment | SP-PAY — no retry path in strategic model | F2 | `Activity_1gma2lm` “retry payment”; `Gateway_12tjvls` “does customer want to retry”; `Activity_1lnt4wn` “release stock”; `Activity_1o2bvfq` “inform customer and give option to retry” | R3 | Partial | No strategic retry path; operational path lacks default flow/timeout |
+| T6 | Producer is notified in time to prepare the order (48-hour lead time) | SP-ORD/SP-PAY — no producer-notification process in strategic model; `Process_08z95qh` only “Produce food for supply” | F2 | `Activity_1vwfzpc` “notify producers” | GAP — no backlog item | Gap | No producer-notification process/backlog item; operational task exists |
+| T7 | Producer receives the correct amount after the 5% commission | SP-PAY — no commission/settlement process in strategic model | F2 | `Activity_1fg0pe2` “calculate commission” | R4 | Partial | No strategic commission/settlement process; operational task exists |
+| T8 | Network receives its 5% commission | SP-PAY — no commission process in strategic model | F2 | `Activity_1fg0pe2` “calculate commission” | R4 | Partial | No strategic commission process; operational task exists |
+| T9 | Order is split into producer-specific order elements | SP-ORD — no explicit split in strategic model | F1 | `Activity_1dnmvp0` “create overall marketplace order”; `Gateway_0aaetje` “are there multiple vendors in order” | R2, R3, R5 | Partial | No strategic split; operational split occurs after payment/notification — review sequence |
+| T10 | One producer rejects their portion; customer receives the rest and a partial refund | SP-ORD/SP-PAY — no exception path modelled | F2 (deferred exception) | GAP — no boundary error event in operational BPMN | R6 | Gap | No boundary error event; scope currently defers R6 |
+| T11 | Customer/producer can trace a food-quality incident to affected orders | SP-QUAL — not modelled | Out of F1/F2 | N/A | R7 | Out of scope | Future/strategic |
+| T12 | Consolidated delivery windows across producers | SP-ORD — not modelled | Out of F1/F2 | N/A | R8 | Out of scope | Future/Should; not required for F1/F2 core |
+| T13 | Customer can contact a producer about quality/safety | SP-QUAL — not modelled | Out of F1/F2 | N/A | R9 | Out of scope | N/A |
+| T14 | Customer can see food miles | SP-CAT/SP-ORD — not modelled | Out of F1/F2 | N/A | R10 | Out of scope | Future/Could |
+| T15 | Customer can buy discounted surplus produce | SP-CAT — not modelled | Out of F1/F2 | N/A | R11 | Out of scope | Future/Could |
+| T16 | Producer organic certification is verified | SP-CERT: `Process_1fttwi9` — `Activity_0vtdrcs` “Certify Organics” | Out of F1/F2 | N/A | R7 (supporting product data) | Out of scope | Strategic model only; Case 1/future |
 
 ## 3. Gap log
 
-| Gap | Description | Action / owner |
-|---|---|---|
-| G1 | No **marketplace platform** pool in the strategic BPMN; “Network Admin” is being used as the platform | Add a platform participant and separate platform operations from admin maintenance — Ada |
-| G2 | Producer process only “Produce food for supply”; no **product listing, stock/availability or order fulfilment** | Add high-level producer processes — Ada |
-| G3 | No **commission/payout/settlement** process in the strategic BPMN | Add a finance/settlement process or sub-process — Ada |
-| G4 | No **producer notification** in the strategic BPMN and no backlog item | Add a backlog item and a strategic notification interaction — Aman/Ada |
-| G5 | **Partial-order failure** is a Must Have in the backlog but has no boundary event or exception path | Decide: downgrade `R6` or add an F2 exception path — Aman/Josh |
-| G6 | **Food-quality traceability** is a Must Have in the backlog but outside the confirmed F1/F2 scope | Mark as strategic/future or explain its supporting role — Josh |
-| G7 | Delivery process contains an **unnamed orphan user task** and splits unconditionally into delivery and collection | Remove/named the task and model the choice explicitly — Ada |
-| G8 | Payment result is checked inside the **Payment sandbox** pool; responsibility should sit with the marketplace platform | Move “check result” to platform; label request/result message flows — Ada |
-| G9 | Operational BPMN has **missing default flows** and gateway semantic errors (parallel gateway used as a decision/join) | Fix before claiming executable — Ada/Josh |
-| G10 | No explicit **per-producer delivery/collection** detail in the strategic model | Add or mark as operational detail for F1 — Ada |
+| Gap | Description | Action | Owner |
+|---|---|---|---|
+| G1 | No **marketplace platform** pool in the strategic BPMN; “Network Admin” is being used as the platform | Add a platform participant and separate platform operations from admin maintenance | Ada |
+| G2 | Producer process only “Produce food for supply”; no **product listing, stock/availability or order fulfilment** | Add high-level producer processes | Ada |
+| G3 | No **commission/payout/settlement** process in the strategic BPMN | Add a finance/settlement process or sub-process | Ada |
+| G4 | No **producer notification** in the strategic BPMN and no backlog item | Add a backlog item and a strategic notification interaction | Aman/Ada |
+| G5 | **Partial-order failure** is a Must Have in the backlog but has no boundary event or exception path | Decide: downgrade `R6` or add an F2 exception path | Aman/Josh |
+| G6 | **Food-quality traceability** is a Must Have in the backlog but outside the confirmed F1/F2 scope | Mark as strategic/future or explain its supporting role | Josh |
+| G7 | Delivery process contains an **unnamed orphan user task** and splits unconditionally into delivery and collection | Remove/named the task and model the choice explicitly | Ada |
+| G8 | Payment result is checked inside the **Payment sandbox** pool; responsibility should sit with the marketplace platform | Move “check result” to platform; label request/result message flows | Ada |
+| G9 | Operational BPMN has **missing default flows** and gateway semantic errors (parallel gateway used as a decision/join) | Fix before claiming executable | Ada/Josh |
+| G10 | No explicit **per-producer delivery/collection** detail in the strategic model | Add or mark as operational detail for F1 | Ada |
 
 ## 4. Evidence notes
 
