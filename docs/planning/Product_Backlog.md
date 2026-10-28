@@ -12,7 +12,8 @@
 | **4** | Automated 5% Commission Deduction | Must Have | Must be calculated in the engine immediately after successful checkout and before distributing funds. | 
 | **5** | Split Delivery/Collection Instructions | Must Have | Post-checkout: Customers must be notified how they will receive their order from the different vendors they purchased from. (delivery/collection details) | 
 | **6** | Partial Order Failure (Exception Handling) | Must Have | Required for advanced Camunda modeling: Proves that the system can issue partial refunds if a single vendor rejects a part of a multi-vendor order. | 
-| **7** | Product Traceability & Safety Data | Should Have | Enhances the catalog (Rank 1): Displays additional details like harvest dates and allergen warnings. (required) | 
+| **7** | Product Traceability & Safety Data | Must Have | Enhances the catalog (Rank 1): Displays additional details like harvest dates and allergen warnings. (required) | 
 | **8** | Consolidated Delivery Synchronization | Should Have | Built on top of basic logistics (Rank 5): Calculates a single delivery window based on the 48-hour minimum lead time across multiple farms. | 
-| **9** | Postcode-based "Food Miles" | Could Have | Extra sustainability feature: Added to the checkout flow only after the core payment routing (Rank 3) is stable. | 
-| **10** | Dynamic Surplus Integration | Could Have | Complex case for waste reduction: Requires the core catalog (Rank 1) and checkout routing (Rank 3) to be fully stable. We can then introduce time-triggered pricing modifiers to the catalog without disrupting standard sales. | 
+| **9** | Direct Vendor Communication | Should Have | Requires Secure Single-Transaction Checkout (Rank 3) to accurately link the customer's completed order to the correct producer for quality and safety reporting. | 
+| **10** | Postcode-based "Food Miles" | Could Have | Extra sustainability feature: Added to the checkout flow only after the core payment routing (Rank 3) is stable. | 
+| **11** | Dynamic Surplus Integration | Could Have | Complex case for waste reduction: Requires the core catalog (Rank 1) and checkout routing (Rank 3) to be fully stable. We can then introduce time-triggered pricing modifiers to the catalog without disrupting standard sales. | 
