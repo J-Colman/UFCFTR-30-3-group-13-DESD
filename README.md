@@ -8,11 +8,11 @@ The Bristol Regional Food Network is a community digital marketplace connecting 
 
 | Name | GitHub Handle | Role |
 | --- | --- | --- |
-| Joshua | [@J-Colman](https://github.com/J-Colman) | Lead/Integration |
-| Izzy | [@Awesometeapot1](https://github.com/Awesometeapot1) | Business Analyst |
-| Ada | [@aido77](https://github.com/aido77) | Strategic BPMN |
-| Aman | [@N30NW1LD-2005](https://github.com/N30NW1LD-2005) | Product Owner/Planning |
-| Yonas | [@yonas1212](https://github.com/yonas1212) | Product Owner/Planning |
+| Joshua | [@J-Colman](https://github.com/J-Colman) | Lead / Integration |
+| Izzy | [@Awesometeapot1](https://github.com/Awesometeapot1) | Business Analyst / Requirements |
+| Ada | [@aido77](https://github.com/aido77) | BPMN Modeller |
+| Aman | [@N30NW1LD-2005](https://github.com/N30NW1LD-2005) | Product Owner / Planning |
+| Yonas | [@yonas1212](https://github.com/yonas1212) | Modelling / Analysis |
 
 ---
 
@@ -67,7 +67,9 @@ UFCFTR-30-3-group-13-DESD/
         ├── product-backlog.md
         ├── scope.md
         ├── sprint-1-checklist.png
-        └── sprint-1-week-1-plan.md
+        ├── sprint-1-week-1-plan.md
+        ├── start on the requirements.docx
+        └── start_on_the_requirements_shortened.docx
 ```
 
 ---
@@ -82,10 +84,10 @@ UFCFTR-30-3-group-13-DESD/
 | Contribution Matrix Template | Module team | [docs/assessment/contributions-matrix-template.docx](docs/assessment/contributions-matrix-template.docx) | Reference copy committed |
 | Stakeholder Analysis | Izzy | [docs/analysis/stakeholder-analysis.docx](docs/analysis/stakeholder-analysis.docx) | Committed |
 | Traceability Matrix | Joshua | [docs/analysis/traceability.md](docs/analysis/traceability.md) | Draft committed (#10) |
-| FR/NFR Analysis | Izzy | `docs/analysis/requirements.md` | Pending #12 |
+| FR/NFR Analysis | Izzy | [docs/planning/start_on_the_requirements_shortened.docx](docs/planning/start_on_the_requirements_shortened.docx) | Committed; in review (#12) |
 | Major Process List | Yonas | `docs/analysis/major-process-list.md` | Pending #5 |
-| Strategic BPMN | Ada | [docs/models/strategic-bpmn.bpmn](docs/models/strategic-bpmn.bpmn) | Draft committed (#4); gaps in traceability |
-| Strategic BPMN Image | Ada | [docs/models/strategic-bpmn.png](docs/models/strategic-bpmn.png) | Draft committed |
+| Strategic BPMN | Ada | [docs/models/strategic-bpmn.bpmn](docs/models/strategic-bpmn.bpmn) | Updated 28 October (#4); traceability not yet updated |
+| Strategic BPMN Image | Ada | [docs/models/strategic-bpmn.png](docs/models/strategic-bpmn.png) | Updated 28 October |
 | Case 2 Use Case Diagram | Yonas | [docs/models/case-2-use-case-diagram.pdf](docs/models/case-2-use-case-diagram.pdf) | Committed |
 | Case 2 Class Diagram | Yonas | [docs/models/case-2-class-diagram.pdf](docs/models/case-2-class-diagram.pdf) | Committed |
 | Case 2 Component Diagram | Yonas | [docs/models/case-2-component-diagram.pdf](docs/models/case-2-component-diagram.pdf) | Committed |
@@ -102,8 +104,8 @@ UFCFTR-30-3-group-13-DESD/
 | Sprint 1 Plan | Joshua | [docs/planning/sprint-1-week-1-plan.md](docs/planning/sprint-1-week-1-plan.md) | Committed |
 | Gantt Chart | Aman | [docs/planning/gantt-chart.png](docs/planning/gantt-chart.png) | Committed |
 | Sprint 1 Checklist | Aman | [docs/planning/sprint-1-checklist.png](docs/planning/sprint-1-checklist.png) | Committed |
-| Contribution Matrix Draft | Joshua | `docs/contribution-matrix/contribution-matrix-sprint-1-draft.docx` | Pending #9 |
-| Sprint 1 Kanban | Joshua | [GitHub Project](https://github.com/users/J-Colman/projects/4) | Public, linked to repo, 12 items |
+| Contribution Matrix Draft | Joshua | [docs/contribution-matrix/contribution-matrix-sprint-1-draft.md](docs/contribution-matrix/contribution-matrix-sprint-1-draft.md) | Pending group agreement (#9) |
+| Sprint 1 Kanban | Joshua | [GitHub Project](https://github.com/users/J-Colman/projects/4) | Public, linked to repo, 14 items |
 | README | Joshua | [README.md](README.md) | Committed |
 
 ---
