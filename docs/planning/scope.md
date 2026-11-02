@@ -57,7 +57,7 @@ Interpretation:
 
 **Stakeholders:** Customers, producers, delivery/collection.
 
-**Strategic process:** `SP-ORD (TBC — align to strategic BPMN)`
+**Strategic processes:** Browse for Products, Choose Collection or Delivery, Create Order
 **Operational model:** `docs/models/case-2-operational-bpmn.bpmn` (draft)
 **Backlog items:** `R1`, `R2`, `R3`, `R5`
 **Acceptance basis:**
@@ -93,7 +93,7 @@ Interpretation:
 
 **Stakeholders:** Customers, producers, payment sandbox, network admin.
 
-**Strategic process:** `SP-PAY (TBC — align to strategic BPMN)`
+**Strategic processes:** Pay for Order, Processes Payment, Check result of Payment, Update Stock, Commission Payout, Notify Producers (message flow)
 **Operational model:** `docs/models/case-2-operational-bpmn.bpmn` (draft; gateway fixes required in Sprint 2)
 **Backlog items:** `R3`, `R4`, plus a new backlog item for producer notification (currently a gap)
 **Acceptance basis:**
@@ -104,11 +104,11 @@ Interpretation:
 
 ## 4. Scope traceability summary
 
-| Functionality | Main stakeholder need | Strategic process | Backlog items |
+| Functionality | Main stakeholder need | Strategic processes | Backlog items |
 |---|---|---|---|
-| F1 | Multi-vendor ordering, stock validation and delivery/collection | `SP-ORD (TBC)` | `R1`, `R2`, `R3`, `R5` |
-| F2 | Payment, 5% commission and producer notification | `SP-PAY (TBC)` | `R3`, `R4`, plus new producer-notification item |
-| Out of scope | Case 1/Case 3 processes, food miles, surplus, direct vendor communication | `SP-CAT` / `SP-QUAL (TBC)` | `R7`, `R9`–`R11` |
+| F1 | Multi-vendor ordering, stock validation and delivery/collection | Browse for Products, Choose Collection or Delivery, Create Order | `R1`, `R2`, `R3`, `R5` |
+| F2 | Payment, 5% commission and producer notification | Pay for Order, Processes Payment, Check result of Payment, Update Stock, Commission Payout, Notify Producers (message flow) | `R3`, `R4`, plus new producer-notification item |
+| Out of scope | Case 1/Case 3 processes, food miles, surplus, direct vendor communication | Product Listing, Certify Organics; food-quality incidents not modelled | `R7`, `R9`–`R11` |
 
 Detailed element-level traceability is maintained separately in `docs/analysis/traceability.md` (`#10`).
 
@@ -141,3 +141,4 @@ Any change to F1/F2 scope must be agreed by the group and recorded here. If it c
 | Date | Author | Change |
 |---|---|---|
 | 28 October 2026 | Josh | Initial confirmed scope after module-team reply |
+| 2 November 2026 | Josh | Replaced strategic process placeholders with process names from the strategic BPMN |
