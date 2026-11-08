@@ -1,0 +1,59 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.6.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.29.0"
+  },
+  "schemaVersion": 16,
+  "id": "brfn-review-order",
+  "type": "default",
+  "components": [
+    {
+      "type": "text",
+      "id": "Text_Heading",
+      "text": "# Review your order\nPlease confirm within **30 minutes** or the checkout will expire."
+    },
+    {
+      "type": "text",
+      "id": "Text_OrderSummary",
+      "text": "{{orderSummaryText}}"
+    },
+    {
+      "type": "radio",
+      "id": "Field_OrderDecision",
+      "key": "orderDecision",
+      "label": "Confirm this order?",
+      "values": [
+        { "label": "Confirm order", "value": "confirm" },
+        { "label": "Cancel order", "value": "cancel" }
+      ],
+      "validate": { "required": true }
+    },
+    {
+      "type": "select",
+      "id": "Field_FulfilmentChoice",
+      "key": "fulfilmentChoice",
+      "label": "How would you like to receive your order?",
+      "valuesKey": "fulfilmentChoices",
+      "validate": { "required": true },
+      "conditional": { "hide": "=orderDecision != \"confirm\"" }
+    },
+    {
+      "type": "textfield",
+      "id": "Field_DeliveryAddress",
+      "key": "deliveryAddress",
+      "label": "Delivery address",
+      "validate": { "required": true },
+      "conditional": { "hide": "=orderDecision != \"confirm\" or fulfilmentChoice != \"DELIVERY\"" }
+    },
+    {
+      "type": "checkbox",
+      "id": "Field_AcceptTerms",
+      "key": "acceptedTerms",
+      "label": "I accept the BRFN terms of sale",
+      "validate": { "required": true },
+      "conditional": { "hide": "=orderDecision != \"confirm\"" }
+    }
+  ]
+}

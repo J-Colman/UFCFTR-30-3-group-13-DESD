@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/"
+             xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/"
+             xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/"
+             xmlns:modeler="http://camunda.org/schema/modeler/1.0"
+             id="Definitions_BRFN_Fulfilment"
+             name="BRFN Fulfilment options"
+             namespace="http://camunda.org/schema/1.0/dmn"
+             exporter="Camunda Modeler"
+             exporterVersion="5.29.0"
+             modeler:executionPlatform="Camunda Cloud"
+             modeler:executionPlatformVersion="8.6.0">
+  <decision id="brfn-fulfilment-options" name="Fulfilment options">
+    <!-- Evaluated once per producer group (parallel multi-instance in the BPMN).
+         Hit policy COLLECT: every matching rule adds one fulfilment option to the result list.
+         Every option carries earliestHours = max(48, producer lead time): no slot is offered sooner than 48 h. -->
+    <decisionTable id="DecisionTable_FulfilmentOptions" hitPolicy="COLLECT">
+      <input id="Input_FoodMiles" label="Food miles (producer to hub)">
+        <inputExpression id="InputExpression_FoodMiles" typeRef="number">
+          <text>producerGroup.foodMiles</text>
+        </inputExpression>
+      </input>
+      <input id="Input_Subtotal" label="Producer subtotal (£)">
+        <inputExpression id="InputExpression_Subtotal" typeRef="number">
+          <text>producerGroup.subtotal</text>
+        </inputExpression>
+      </input>
+      <input id="Input_LeadTime" label="Producer lead time (h)">
+        <inputExpression id="InputExpression_LeadTime" typeRef="number">
+          <text>producerGroup.leadTimeHours</text>
+        </inputExpression>
+      </input>
+      <output id="Output_Option" label="Option" name="option" typeRef="string" />
+      <output id="Output_Label" label="Label" name="label" typeRef="string" />
+      <output id="Output_Fee" label="Fee (£)" name="fee" typeRef="number" />
+      <output id="Output_EarliestHours" label="Earliest slot (h from now)" name="earliestHours" typeRef="number" />
+
+      <rule id="Rule_LocalSmall">
+        <description>Local producer, small order: delivery charged</description>
+        <inputEntry id="Rule_LocalSmall_In1"><text>&lt;= 10</text></inputEntry>
+        <inputEntry id="Rule_LocalSmall_In2"><text>&lt; 25</text></inputEntry>
+        <inputEntry id="Rule_LocalSmall_In3"><text>-</text></inputEntry>
+        <outputEntry id="Rule_LocalSmall_Out1"><text>"LOCAL_DELIVERY"</text></outputEntry>
+        <outputEntry id="Rule_LocalSmall_Out2"><text>"Local van delivery"</text></outputEntry>
+        <outputEntry id="Rule_LocalSmall_Out3"><text>3.50</text></outputEntry>
+        <outputEntry id="Rule_LocalSmall_Out4"><text>max(48, producerGroup.leadTimeHours)</text></outputEntry>
+      </rule>
+      <rule id="Rule_LocalLarge">
+        <description>Local producer, order of £25 or more: free delivery</description>
+        <inputEntry id="Rule_LocalLarge_In1"><text>&lt;= 10</text></inputEntry>
+        <inputEntry id="Rule_LocalLarge_In2"><text>&gt;= 25</text></inputEntry>
+        <inputEntry id="Rule_LocalLarge_In3"><text>-</text></inputEntry>
+        <outputEntry id="Rule_LocalLarge_Out1"><text>"LOCAL_DELIVERY"</text></outputEntry>
+        <outputEntry id="Rule_LocalLarge_Out2"><text>"Local van delivery (free over £25)"</text></outputEntry>
+        <outputEntry id="Rule_LocalLarge_Out3"><text>0</text></outputEntry>
+        <outputEntry id="Rule_LocalLarge_Out4"><text>max(48, producerGroup.leadTimeHours)</text></outputEntry>
+      </rule>
+      <rule id="Rule_Regional">
+        <description>Regional producer</description>
+        <inputEntry id="Rule_Regional_In1"><text>]10..40]</text></inputEntry>
+        <inputEntry id="Rule_Regional_In2"><text>-</text></inputEntry>
+        <inputEntry id="Rule_Regional_In3"><text>-</text></inputEntry>
+        <outputEntry id="Rule_Regional_Out1"><text>"REGIONAL_DELIVERY"</text></outputEntry>
+        <outputEntry id="Rule_Regional_Out2"><text>"Regional delivery"</text></outputEntry>
+        <outputEntry id="Rule_Regional_Out3"><text>5.95</text></outputEntry>
+        <outputEntry id="Rule_Regional_Out4"><text>max(48, producerGroup.leadTimeHours)</text></outputEntry>
+      </rule>
+      <rule id="Rule_Courier">
+        <description>Distant producer: chilled courier only</description>
+        <inputEntry id="Rule_Courier_In1"><text>&gt; 40</text></inputEntry>
+        <inputEntry id="Rule_Courier_In2"><text>-</text></inputEntry>
+        <inputEntry id="Rule_Courier_In3"><text>-</text></inputEntry>
+        <outputEntry id="Rule_Courier_Out1"><text>"COURIER"</text></outputEntry>
+        <outputEntry id="Rule_Courier_Out2"><text>"Chilled courier"</text></outputEntry>
+        <outputEntry id="Rule_Courier_Out3"><text>8.95</text></outputEntry>
+        <outputEntry id="Rule_Courier_Out4"><text>max(48, producerGroup.leadTimeHours)</text></outputEntry>
+      </rule>
+      <rule id="Rule_Collection">
+        <description>Every producer can supply to the hub for customer collection</description>
+        <inputEntry id="Rule_Collection_In1"><text>-</text></inputEntry>
+        <inputEntry id="Rule_Collection_In2"><text>-</text></inputEntry>
+        <inputEntry id="Rule_Collection_In3"><text>-</text></inputEntry>
+        <outputEntry id="Rule_Collection_Out1"><text>"COLLECTION"</text></outputEntry>
+        <outputEntry id="Rule_Collection_Out2"><text>"Collect from BRFN hub"</text></outputEntry>
+        <outputEntry id="Rule_Collection_Out3"><text>0</text></outputEntry>
+        <outputEntry id="Rule_Collection_Out4"><text>max(48, producerGroup.leadTimeHours)</text></outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_Fulfilment">
+      <dmndi:DMNShape id="DMNShape_FulfilmentOptions" dmnElementRef="brfn-fulfilment-options">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

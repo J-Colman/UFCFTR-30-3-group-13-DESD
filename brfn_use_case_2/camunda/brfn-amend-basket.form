@@ -1,0 +1,56 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.6.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.29.0"
+  },
+  "schemaVersion": 16,
+  "id": "brfn-amend-basket",
+  "type": "default",
+  "components": [
+    {
+      "type": "text",
+      "id": "Text_Heading",
+      "text": "# Some items in your basket are unavailable\nYou have **30 minutes** to amend your basket before it expires."
+    },
+    {
+      "type": "text",
+      "id": "Text_Unavailable",
+      "text": "{{unavailableSummary}}"
+    },
+    {
+      "type": "textfield",
+      "id": "Field_BasketTotal",
+      "key": "basketTotalText",
+      "label": "Current basket total",
+      "readonly": true
+    },
+    {
+      "type": "radio",
+      "id": "Field_CustomerDecision",
+      "key": "customerDecision",
+      "label": "What would you like to do?",
+      "values": [
+        { "label": "Update my basket and continue", "value": "update" },
+        { "label": "Cancel checkout", "value": "cancel" }
+      ],
+      "validate": { "required": true }
+    },
+    {
+      "type": "checkbox",
+      "id": "Field_RemoveUnavailable",
+      "key": "removeUnavailable",
+      "label": "Remove unavailable items and reduce quantities to what is in stock",
+      "defaultValue": true,
+      "conditional": { "hide": "=customerDecision != \"update\"" }
+    },
+    {
+      "type": "textarea",
+      "id": "Field_BasketNote",
+      "key": "basketNote",
+      "label": "Note for the producers (optional)",
+      "conditional": { "hide": "=customerDecision != \"update\"" }
+    }
+  ]
+}

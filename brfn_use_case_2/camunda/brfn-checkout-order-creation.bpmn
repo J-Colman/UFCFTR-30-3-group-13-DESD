@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+                  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+                  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+                  xmlns:zeebe="http://camunda.org/schema/zeebe/1.0"
+                  xmlns:modeler="http://camunda.org/schema/modeler/1.0"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  id="Definitions_BRFN_Checkout"
+                  targetNamespace="http://bpmn.io/schema/bpmn"
+                  exporter="Camunda Modeler"
+                  exporterVersion="5.29.0"
+                  modeler:executionPlatform="Camunda Cloud"
+                  modeler:executionPlatformVersion="8.6.0">
+
+  <bpmn:collaboration id="Collaboration_BRFN">
+    <bpmn:participant id="Participant_Checkout" name="BRFN CHECKOUT AND ORDER CREATION" processRef="brfn-checkout-order-creation" />
+    <bpmn:participant id="Participant_CatalogueService" name="catalogue, inventory and order service" />
+    <bpmn:messageFlow id="MessageFlow_StockQuery" name="Stock query" sourceRef="Task_CheckStock" targetRef="Participant_CatalogueService" />
+    <bpmn:messageFlow id="MessageFlow_ProducerData" name="Producer data" sourceRef="Task_GroupByProducer" targetRef="Participant_CatalogueService" />
+    <bpmn:messageFlow id="MessageFlow_Reserve" name="Reserve" sourceRef="Task_ReserveStock" targetRef="Participant_CatalogueService" />
+    <bpmn:messageFlow id="MessageFlow_Release" name="release" sourceRef="Task_ReleaseStock" targetRef="Participant_CatalogueService" />
+  </bpmn:collaboration>
+
+  <bpmn:error id="Error_StockChanged" name="Stock changed" errorCode="STOCK_CHANGED" />
+
+  <bpmn:process id="brfn-checkout-order-creation" name="BRFN Checkout and Order Creation" isExecutable="true">
+    <bpmn:laneSet id="LaneSet_Checkout">
+      <bpmn:lane id="Lane_Customer" name="CUSTOMER">
+        <bpmn:flowNodeRef>Task_AmendBasket</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Timer_AmendBasket</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_BasketExpired</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_CustomerDecision</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_CheckoutAbandonedByCustomer</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ReviewOrder</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Timer_ReviewOrder</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_CheckoutExpired</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_OrderConfirmed</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_CancelledByCustomer</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Marketplace" name="MARKETPLACE PLATFORM">
+        <bpmn:flowNodeRef>Start_CheckoutRequested</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_MergeBasket</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_CheckStock</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_BasketAvailable</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_BasketEmpty</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_GroupByProducer</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_DecideDeliveryOptions</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_PrepareOrderReview</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ReserveStock</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Boundary_StockChanged</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_CreateOrder</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_PaymentFulfilment</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_OrderCompleted</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_OrderPlaced</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ReleaseStock</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_NotifyNotCompleted</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_OrderNotPlaced</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+
+    <!-- ===== Start and basket loop ===== -->
+    <bpmn:startEvent id="Start_CheckoutRequested" name="checkout requested">
+      <bpmn:outgoing>Flow_Start_Merge</bpmn:outgoing>
+    </bpmn:startEvent>
+
+    <bpmn:exclusiveGateway id="Gateway_MergeBasket">
+      <bpmn:incoming>Flow_Start_Merge</bpmn:incoming>
+      <bpmn:incoming>Flow_BasketUpdated</bpmn:incoming>
+      <bpmn:incoming>Flow_StockChanged</bpmn:incoming>
+      <bpmn:outgoing>Flow_Merge_CheckStock</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+
+    <bpmn:serviceTask id="Task_CheckStock" name="check stock availability">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="brfn-check-stock" retries="3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_Merge_CheckStock</bpmn:incoming>
+      <bpmn:outgoing>Flow_CheckStock_Gateway</bpmn:outgoing>
+    </bpmn:serviceTask>
+
+    <bpmn:exclusiveGateway id="Gateway_BasketAvailable" name="Basket available?">
+      <bpmn:incoming>Flow_CheckStock_Gateway</bpmn:incoming>
+      <bpmn:outgoing>Flow_AllAvailable</bpmn:outgoing>
+      <bpmn:outgoing>Flow_ItemsUnavailable</bpmn:outgoing>
+      <bpmn:outgoing>Flow_BasketEmpty</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+
+    <bpmn:endEvent id="End_BasketEmpty" name="Checkout abandoned">
+      <bpmn:incoming>Flow_BasketEmpty</bpmn:incoming>
+    </bpmn:endEvent>
+
+    <bpmn:userTask id="Task_AmendBasket" name="Amend basket">
+      <bpmn:extensionElements>
+        <zeebe:userTask />
+        <zeebe:formDefinition formId="brfn-amend-basket" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_ItemsUnavailable</bpmn:incoming>
+      <bpmn:outgoing>Flow_Amend_Decision</bpmn:outgoing>
+    </bpmn:userTask>
+
+    <bpmn:boundaryEvent id="Timer_AmendBasket" name="30 min" attachedToRef="Task_AmendBasket">
+      <bpmn:outgoing>Flow_BasketTimeout</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerDef_AmendBasket">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT30M</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+
+    <bpmn:endEvent id="End_BasketExpired" name="Basket expired">
+      <bpmn:incoming>Flow_BasketTimeout</bpmn:incoming>
+    </bpmn:endEvent>
+
+    <bpmn:exclusiveGateway id="Gateway_CustomerDecision" name="Customer decision?" default="Flow_CustomerCancel">
+      <bpmn:incoming>Flow_Amend_Decision</bpmn:incoming>
+      <bpmn:outgoing>Flow_CustomerCancel</bpmn:outgoing>
+      <bpmn:outgoing>Flow_BasketUpdated</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+
+    <bpmn:endEvent id="End_CheckoutAbandonedByCustomer" name="Checkout abandoned">
+      <bpmn:incoming>Flow_CustomerCancel</bpmn:incoming>
+    </bpmn:endEvent>
+
+    <!-- ===== Grouping, DMN and review ===== -->
+    <bpmn:serviceTask id="Task_GroupByProducer" name="Group by producer and food miles">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="brfn-group-by-producer" retries="3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_AllAvailable</bpmn:incoming>
+      <bpmn:outgoing>Flow_Group_Decide</bpmn:outgoing>
+    </bpmn:serviceTask>
+
+    <bpmn:businessRuleTask id="Task_DecideDeliveryOptions" name="Decide delivery options">
+      <bpmn:extensionElements>
+        <zeebe:calledDecision decisionId="brfn-fulfilment-options" resultVariable="producerOptions" />
+        <zeebe:ioMapping>
+          <zeebe:input source="=null" target="producerOptions" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_Group_Decide</bpmn:incoming>
+      <bpmn:outgoing>Flow_Decide_Prepare</bpmn:outgoing>
+      <bpmn:multiInstanceLoopCharacteristics>
+        <bpmn:extensionElements>
+          <zeebe:loopCharacteristics inputCollection="=producerGroups" inputElement="producerGroup" outputCollection="fulfilmentOptionsByProducer" outputElement="={producerId: producerGroup.producerId, producerName: producerGroup.producerName, subtotal: producerGroup.subtotal, options: producerOptions}" />
+        </bpmn:extensionElements>
+      </bpmn:multiInstanceLoopCharacteristics>
+    </bpmn:businessRuleTask>
+
+    <bpmn:serviceTask id="Task_PrepareOrderReview" name="Prepare order review">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="brfn-prepare-order-review" retries="3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_Decide_Prepare</bpmn:incoming>
+      <bpmn:outgoing>Flow_Prepare_Review</bpmn:outgoing>
+    </bpmn:serviceTask>
+
+    <bpmn:userTask id="Task_ReviewOrder" name="Review order and choose fulfilment">
+      <bpmn:extensionElements>
+        <zeebe:userTask />
+        <zeebe:formDefinition formId="brfn-review-order" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_Prepare_Review</bpmn:incoming>
+      <bpmn:outgoing>Flow_Review_Gateway</bpmn:outgoing>
+    </bpmn:userTask>
+
+    <bpmn:boundaryEvent id="Timer_ReviewOrder" name="30 min" attachedToRef="Task_ReviewOrder">
+      <bpmn:outgoing>Flow_ReviewTimeout</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerDef_ReviewOrder">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT30M</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+
+    <bpmn:endEvent id="End_CheckoutExpired" name="Checkout expired">
+      <bpmn:incoming>Flow_ReviewTimeout</bpmn:incoming>
+    </bpmn:endEvent>
+
+    <bpmn:exclusiveGateway id="Gateway_OrderConfirmed" name="Order confirmed?" default="Flow_OrderCancel">
+      <bpmn:incoming>Flow_Review_Gateway</bpmn:incoming>
+      <bpmn:outgoing>Flow_OrderCancel</bpmn:outgoing>
+      <bpmn:outgoing>Flow_OrderConfirm</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+
+    <bpmn:endEvent id="End_CancelledByCustomer" name="Cancelled by customer">
+      <bpmn:incoming>Flow_OrderCancel</bpmn:incoming>
+    </bpmn:endEvent>
+
+    <!-- ===== Reservation, order, payment ===== -->
+    <bpmn:serviceTask id="Task_ReserveStock" name="Reserve stock">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="brfn-reserve-stock" retries="3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_OrderConfirm</bpmn:incoming>
+      <bpmn:outgoing>Flow_Reserve_Create</bpmn:outgoing>
+    </bpmn:serviceTask>
+
+    <bpmn:boundaryEvent id="Boundary_StockChanged" name="Stock changed" attachedToRef="Task_ReserveStock">
+      <bpmn:outgoing>Flow_StockChanged</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorDef_StockChanged" errorRef="Error_StockChanged" />
+    </bpmn:boundaryEvent>
+
+    <bpmn:serviceTask id="Task_CreateOrder" name="Create order and split by producer">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="brfn-create-order" retries="3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_Reserve_Create</bpmn:incoming>
+      <bpmn:outgoing>Flow_Create_Payment</bpmn:outgoing>
+    </bpmn:serviceTask>
+
+    <bpmn:subProcess id="Activity_PaymentFulfilment" name="Payment and Fulfilment">
+      <bpmn:incoming>Flow_Create_Payment</bpmn:incoming>
+      <bpmn:outgoing>Flow_Payment_Gateway</bpmn:outgoing>
+      <bpmn:startEvent id="Sub_Start" name="Order created">
+        <bpmn:outgoing>Sub_Flow_Start_Pay</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:serviceTask id="Sub_Task_TakePayment" name="Take payment">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="brfn-take-payment" retries="3" />
+        </bpmn:extensionElements>
+        <bpmn:incoming>Sub_Flow_Start_Pay</bpmn:incoming>
+        <bpmn:outgoing>Sub_Flow_Pay_Gateway</bpmn:outgoing>
+      </bpmn:serviceTask>
+      <bpmn:exclusiveGateway id="Sub_Gateway_PaymentOk" name="Payment successful?" default="Sub_Flow_PaymentFailed">
+        <bpmn:incoming>Sub_Flow_Pay_Gateway</bpmn:incoming>
+        <bpmn:outgoing>Sub_Flow_PaymentOk</bpmn:outgoing>
+        <bpmn:outgoing>Sub_Flow_PaymentFailed</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+      <bpmn:serviceTask id="Sub_Task_ConfirmProducers" name="Confirm producer orders and schedule fulfilment">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="brfn-confirm-producer-orders" retries="3" />
+        </bpmn:extensionElements>
+        <bpmn:incoming>Sub_Flow_PaymentOk</bpmn:incoming>
+        <bpmn:outgoing>Sub_Flow_Confirm_End</bpmn:outgoing>
+      </bpmn:serviceTask>
+      <bpmn:endEvent id="Sub_End_Fulfilled" name="Order fulfilment scheduled">
+        <bpmn:incoming>Sub_Flow_Confirm_End</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:endEvent id="Sub_End_PaymentFailed" name="Payment failed">
+        <bpmn:incoming>Sub_Flow_PaymentFailed</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Sub_Flow_Start_Pay" sourceRef="Sub_Start" targetRef="Sub_Task_TakePayment" />
+      <bpmn:sequenceFlow id="Sub_Flow_Pay_Gateway" sourceRef="Sub_Task_TakePayment" targetRef="Sub_Gateway_PaymentOk" />
+      <bpmn:sequenceFlow id="Sub_Flow_PaymentOk" name="yes" sourceRef="Sub_Gateway_PaymentOk" targetRef="Sub_Task_ConfirmProducers">
+        <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=paymentStatus = "PAID"</bpmn:conditionExpression>
+      </bpmn:sequenceFlow>
+      <bpmn:sequenceFlow id="Sub_Flow_PaymentFailed" name="no" sourceRef="Sub_Gateway_PaymentOk" targetRef="Sub_End_PaymentFailed" />
+      <bpmn:sequenceFlow id="Sub_Flow_Confirm_End" sourceRef="Sub_Task_ConfirmProducers" targetRef="Sub_End_Fulfilled" />
+    </bpmn:subProcess>
+
+    <bpmn:exclusiveGateway id="Gateway_OrderCompleted" name="Order completed?" default="Flow_OrderNotCompleted">
+      <bpmn:incoming>Flow_Payment_Gateway</bpmn:incoming>
+      <bpmn:outgoing>Flow_OrderCompletedYes</bpmn:outgoing>
+      <bpmn:outgoing>Flow_OrderNotCompleted</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+
+    <bpmn:endEvent id="End_OrderPlaced" name="Order placed and confirmed">
+      <bpmn:incoming>Flow_OrderCompletedYes</bpmn:incoming>
+    </bpmn:endEvent>
+
+    <bpmn:serviceTask id="Task_ReleaseStock" name="Release stock and cancel order">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="brfn-release-stock" retries="3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_OrderNotCompleted</bpmn:incoming>
+      <bpmn:outgoing>Flow_Release_Notify</bpmn:outgoing>
+    </bpmn:serviceTask>
+
+    <bpmn:serviceTask id="Task_NotifyNotCompleted" name="Notify customer (not completed)">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="brfn-notify-customer" retries="3" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_Release_Notify</bpmn:incoming>
+      <bpmn:outgoing>Flow_Notify_End</bpmn:outgoing>
+    </bpmn:serviceTask>
+
+    <bpmn:endEvent id="End_OrderNotPlaced" name="Order not placed">
+      <bpmn:incoming>Flow_Notify_End</bpmn:incoming>
+    </bpmn:endEvent>
+
+    <bpmn:textAnnotation id="Annotation_DMN">
+      <bpmn:text>DMN "Fulfilment options" evaluated once per producer (parallel multi-instance). lead time &gt;= 48 h</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_DMN" associationDirection="None" sourceRef="Task_DecideDeliveryOptions" targetRef="Annotation_DMN" />
+
+    <!-- ===== Sequence flows ===== -->
+    <bpmn:sequenceFlow id="Flow_Start_Merge" sourceRef="Start_CheckoutRequested" targetRef="Gateway_MergeBasket" />
+    <bpmn:sequenceFlow id="Flow_Merge_CheckStock" sourceRef="Gateway_MergeBasket" targetRef="Task_CheckStock" />
+    <bpmn:sequenceFlow id="Flow_CheckStock_Gateway" sourceRef="Task_CheckStock" targetRef="Gateway_BasketAvailable" />
+    <bpmn:sequenceFlow id="Flow_AllAvailable" name="All available" sourceRef="Gateway_BasketAvailable" targetRef="Task_GroupByProducer">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=stockStatus = "ALL_AVAILABLE"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_ItemsUnavailable" name="Items unavailable" sourceRef="Gateway_BasketAvailable" targetRef="Task_AmendBasket">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=stockStatus = "PARTIAL"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_BasketEmpty" name="Basket empty" sourceRef="Gateway_BasketAvailable" targetRef="End_BasketEmpty">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=stockStatus = "EMPTY"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_Amend_Decision" sourceRef="Task_AmendBasket" targetRef="Gateway_CustomerDecision" />
+    <bpmn:sequenceFlow id="Flow_BasketTimeout" name="Duration" sourceRef="Timer_AmendBasket" targetRef="End_BasketExpired" />
+    <bpmn:sequenceFlow id="Flow_CustomerCancel" name="cancel" sourceRef="Gateway_CustomerDecision" targetRef="End_CheckoutAbandonedByCustomer" />
+    <bpmn:sequenceFlow id="Flow_BasketUpdated" name="Basket updated" sourceRef="Gateway_CustomerDecision" targetRef="Gateway_MergeBasket">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=customerDecision = "update"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_Group_Decide" sourceRef="Task_GroupByProducer" targetRef="Task_DecideDeliveryOptions" />
+    <bpmn:sequenceFlow id="Flow_Decide_Prepare" sourceRef="Task_DecideDeliveryOptions" targetRef="Task_PrepareOrderReview" />
+    <bpmn:sequenceFlow id="Flow_Prepare_Review" sourceRef="Task_PrepareOrderReview" targetRef="Task_ReviewOrder" />
+    <bpmn:sequenceFlow id="Flow_ReviewTimeout" sourceRef="Timer_ReviewOrder" targetRef="End_CheckoutExpired" />
+    <bpmn:sequenceFlow id="Flow_Review_Gateway" sourceRef="Task_ReviewOrder" targetRef="Gateway_OrderConfirmed" />
+    <bpmn:sequenceFlow id="Flow_OrderCancel" name="Cancel" sourceRef="Gateway_OrderConfirmed" targetRef="End_CancelledByCustomer" />
+    <bpmn:sequenceFlow id="Flow_OrderConfirm" name="Confirm" sourceRef="Gateway_OrderConfirmed" targetRef="Task_ReserveStock">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=orderDecision = "confirm"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_StockChanged" sourceRef="Boundary_StockChanged" targetRef="Gateway_MergeBasket" />
+    <bpmn:sequenceFlow id="Flow_Reserve_Create" sourceRef="Task_ReserveStock" targetRef="Task_CreateOrder" />
+    <bpmn:sequenceFlow id="Flow_Create_Payment" sourceRef="Task_CreateOrder" targetRef="Activity_PaymentFulfilment" />
+    <bpmn:sequenceFlow id="Flow_Payment_Gateway" sourceRef="Activity_PaymentFulfilment" targetRef="Gateway_OrderCompleted" />
+    <bpmn:sequenceFlow id="Flow_OrderCompletedYes" name="yes" sourceRef="Gateway_OrderCompleted" targetRef="End_OrderPlaced">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=orderCompleted = true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_OrderNotCompleted" name="no" sourceRef="Gateway_OrderCompleted" targetRef="Task_ReleaseStock" />
+    <bpmn:sequenceFlow id="Flow_Release_Notify" sourceRef="Task_ReleaseStock" targetRef="Task_NotifyNotCompleted" />
+    <bpmn:sequenceFlow id="Flow_Notify_End" sourceRef="Task_NotifyNotCompleted" targetRef="End_OrderNotPlaced" />
+  </bpmn:process>
+
+  <!-- ================= Diagram: main collaboration ================= -->
+  <bpmndi:BPMNDiagram id="BPMNDiagram_Main">
+    <bpmndi:BPMNPlane id="BPMNPlane_Main" bpmnElement="Collaboration_BRFN">
+      <bpmndi:BPMNShape id="Participant_Checkout_di" bpmnElement="Participant_Checkout" isHorizontal="true">
+        <dc:Bounds x="5" y="5" width="2565" height="767" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Customer_di" bpmnElement="Lane_Customer" isHorizontal="true">
+        <dc:Bounds x="35" y="5" width="2535" height="426" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Marketplace_di" bpmnElement="Lane_Marketplace" isHorizontal="true">
+        <dc:Bounds x="35" y="431" width="2535" height="341" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_CatalogueService_di" bpmnElement="Participant_CatalogueService" isHorizontal="true">
+        <dc:Bounds x="5" y="857" width="2565" height="160" />
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Start_CheckoutRequested_di" bpmnElement="Start_CheckoutRequested">
+        <dc:Bounds x="101" y="547" width="36" height="36" />
+        <bpmndi:BPMNLabel><dc:Bounds x="85" y="590" width="68" height="27" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_MergeBasket_di" bpmnElement="Gateway_MergeBasket" isMarkerVisible="true">
+        <dc:Bounds x="240" y="540" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_CheckStock_di" bpmnElement="Task_CheckStock">
+        <dc:Bounds x="376" y="516" width="121" height="97" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_BasketAvailable_di" bpmnElement="Gateway_BasketAvailable" isMarkerVisible="true">
+        <dc:Bounds x="606" y="540" width="50" height="50" />
+        <bpmndi:BPMNLabel><dc:Bounds x="505" y="515" width="65" height="27" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_BasketEmpty_di" bpmnElement="End_BasketEmpty">
+        <dc:Bounds x="613" y="658" width="36" height="36" />
+        <bpmndi:BPMNLabel><dc:Bounds x="658" y="668" width="68" height="27" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AmendBasket_di" bpmnElement="Task_AmendBasket">
+        <dc:Bounds x="570" y="260" width="122" height="97" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_BasketExpired_di" bpmnElement="End_BasketExpired">
+        <dc:Bounds x="760" y="143" width="36" height="36" />
+        <bpmndi:BPMNLabel><dc:Bounds x="812" y="154" width="74" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_CustomerDecision_di" bpmnElement="Gateway_CustomerDecision" isMarkerVisible="true">
+        <dc:Bounds x="765" y="283" width="50" height="50" />
+        <bpmndi:BPMNLabel><dc:Bounds x="795" y="338" width="62" height="27" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_CheckoutAbandonedByCustomer_di" bpmnElement="End_CheckoutAbandonedByCustomer">
+        <dc:Bounds x="942" y="291" width="36" height="36" />
+        <bpmndi:BPMNLabel><dc:Bounds x="926" y="334" width="68" height="27" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_GroupByProducer_di" bpmnElement="Task_GroupByProducer">
+        <dc:Bounds x="802" y="516" width="122" height="97" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_DecideDeliveryOptions_di" bpmnElement="Task_DecideDeliveryOptions">
+        <dc:Bounds x="1021" y="516" width="122" height="97" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_PrepareOrderReview_di" bpmnElement="Task_PrepareOrderReview">
+        <dc:Bounds x="1253" y="516" width="122" height="97" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ReviewOrder_di" bpmnElement="Task_ReviewOrder">
+        <dc:Bounds x="1448" y="198" width="122" height="97" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_CheckoutExpired_di" bpmnElement="End_CheckoutExpired">
+        <dc:Bounds x="1638" y="83" width="36" height="36" />
+        <bpmndi:BPMNLabel><dc:Bounds x="1700" y="93" width="64" height="27" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_OrderConfirmed_di" bpmnElement="Gateway_OrderConfirmed" isMarkerVisible="true">
+        <dc:Bounds x="1618" y="222" width="50" height="50" />
+        <bpmndi:BPMNLabel><dc:Bounds x="1558" y="303" width="72" height="27" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_CancelledByCustomer_di" bpmnElement="End_CancelledByCustomer">
+        <dc:Bounds x="1795" y="229" width="36" height="36" />
+        <bpmndi:BPMNLabel><dc:Bounds x="1775" y="278" width="78" height="27" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ReserveStock_di" bpmnElement="Task_ReserveStock">
+        <dc:Bounds x="1582" y="480" width="122" height="97" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_CreateOrder_di" bpmnElement="Task_CreateOrder">
+        <dc:Bounds x="1765" y="480" width="122" height="97" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_PaymentFulfilment_di" bpmnElement="Activity_PaymentFulfilment" isExpanded="false">
+        <dc:Bounds x="1948" y="480" width="122" height="97" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_OrderCompleted_di" bpmnElement="Gateway_OrderCompleted" isMarkerVisible="true">
+        <dc:Bounds x="2142" y="503" width="50" height="50" />
+        <bpmndi:BPMNLabel><dc:Bounds x="2088" y="470" width="110" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_OrderPlaced_di" bpmnElement="End_OrderPlaced">
+        <dc:Bounds x="2320" y="510" width="36" height="36" />
+        <bpmndi:BPMNLabel><dc:Bounds x="2283" y="556" width="110" height="27" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ReleaseStock_di" bpmnElement="Task_ReleaseStock">
+        <dc:Bounds x="2107" y="638" width="122" height="97" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_NotifyNotCompleted_di" bpmnElement="Task_NotifyNotCompleted">
+        <dc:Bounds x="2290" y="638" width="122" height="97" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_OrderNotPlaced_di" bpmnElement="End_OrderNotPlaced">
+        <dc:Bounds x="2479" y="669" width="36" height="36" />
+        <bpmndi:BPMNLabel><dc:Bounds x="2444" y="715" width="106" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Annotation_DMN_di" bpmnElement="Annotation_DMN">
+        <dc:Bounds x="1106" y="200" width="280" height="68" />
+      </bpmndi:BPMNShape>
+
+      <!-- boundary events (after their hosts so they render on top) -->
+      <bpmndi:BPMNShape id="Timer_AmendBasket_di" bpmnElement="Timer_AmendBasket">
+        <dc:Bounds x="650" y="242" width="36" height="36" />
+        <bpmndi:BPMNLabel><dc:Bounds x="610" y="215" width="34" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Timer_ReviewOrder_di" bpmnElement="Timer_ReviewOrder">
+        <dc:Bounds x="1528" y="180" width="36" height="36" />
+        <bpmndi:BPMNLabel><dc:Bounds x="1488" y="136" width="34" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Boundary_StockChanged_di" bpmnElement="Boundary_StockChanged">
+        <dc:Bounds x="1600" y="559" width="36" height="36" />
+        <bpmndi:BPMNLabel><dc:Bounds x="1512" y="642" width="90" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <!-- sequence flows -->
+      <bpmndi:BPMNEdge id="Flow_Start_Merge_di" bpmnElement="Flow_Start_Merge">
+        <di:waypoint x="137" y="565" /><di:waypoint x="240" y="565" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Merge_CheckStock_di" bpmnElement="Flow_Merge_CheckStock">
+        <di:waypoint x="290" y="565" /><di:waypoint x="376" y="565" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_CheckStock_Gateway_di" bpmnElement="Flow_CheckStock_Gateway">
+        <di:waypoint x="497" y="565" /><di:waypoint x="606" y="565" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_AllAvailable_di" bpmnElement="Flow_AllAvailable">
+        <di:waypoint x="656" y="565" /><di:waypoint x="802" y="565" />
+        <bpmndi:BPMNLabel><dc:Bounds x="696" y="543" width="72" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_BasketEmpty_di" bpmnElement="Flow_BasketEmpty">
+        <di:waypoint x="631" y="590" /><di:waypoint x="631" y="658" />
+        <bpmndi:BPMNLabel><dc:Bounds x="650" y="621" width="66" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ItemsUnavailable_di" bpmnElement="Flow_ItemsUnavailable">
+        <di:waypoint x="631" y="540" /><di:waypoint x="631" y="357" />
+        <bpmndi:BPMNLabel><dc:Bounds x="640" y="400" width="88" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Amend_Decision_di" bpmnElement="Flow_Amend_Decision">
+        <di:waypoint x="692" y="308" /><di:waypoint x="765" y="308" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_BasketTimeout_di" bpmnElement="Flow_BasketTimeout">
+        <di:waypoint x="668" y="242" /><di:waypoint x="668" y="161" /><di:waypoint x="760" y="161" />
+        <bpmndi:BPMNLabel><dc:Bounds x="618" y="154" width="44" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_CustomerCancel_di" bpmnElement="Flow_CustomerCancel">
+        <di:waypoint x="815" y="308" /><di:waypoint x="942" y="309" />
+        <bpmndi:BPMNLabel><dc:Bounds x="860" y="287" width="34" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_BasketUpdated_di" bpmnElement="Flow_BasketUpdated">
+        <di:waypoint x="790" y="333" /><di:waypoint x="790" y="393" /><di:waypoint x="265" y="393" /><di:waypoint x="265" y="540" />
+        <bpmndi:BPMNLabel><dc:Bounds x="389" y="372" width="76" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Group_Decide_di" bpmnElement="Flow_Group_Decide">
+        <di:waypoint x="924" y="565" /><di:waypoint x="1021" y="565" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Decide_Prepare_di" bpmnElement="Flow_Decide_Prepare">
+        <di:waypoint x="1143" y="565" /><di:waypoint x="1253" y="565" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Prepare_Review_di" bpmnElement="Flow_Prepare_Review">
+        <di:waypoint x="1375" y="565" /><di:waypoint x="1411" y="565" /><di:waypoint x="1411" y="247" /><di:waypoint x="1448" y="247" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ReviewTimeout_di" bpmnElement="Flow_ReviewTimeout">
+        <di:waypoint x="1546" y="180" /><di:waypoint x="1546" y="101" /><di:waypoint x="1638" y="101" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Review_Gateway_di" bpmnElement="Flow_Review_Gateway">
+        <di:waypoint x="1570" y="247" /><di:waypoint x="1618" y="247" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_OrderCancel_di" bpmnElement="Flow_OrderCancel">
+        <di:waypoint x="1668" y="247" /><di:waypoint x="1795" y="247" />
+        <bpmndi:BPMNLabel><dc:Bounds x="1712" y="226" width="36" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_OrderConfirm_di" bpmnElement="Flow_OrderConfirm">
+        <di:waypoint x="1643" y="272" /><di:waypoint x="1643" y="480" />
+        <bpmndi:BPMNLabel><dc:Bounds x="1656" y="381" width="42" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_StockChanged_di" bpmnElement="Flow_StockChanged">
+        <di:waypoint x="1618" y="595" /><di:waypoint x="1618" y="746" /><di:waypoint x="265" y="746" /><di:waypoint x="265" y="590" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Reserve_Create_di" bpmnElement="Flow_Reserve_Create">
+        <di:waypoint x="1704" y="528" /><di:waypoint x="1765" y="528" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Create_Payment_di" bpmnElement="Flow_Create_Payment">
+        <di:waypoint x="1887" y="528" /><di:waypoint x="1948" y="528" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Payment_Gateway_di" bpmnElement="Flow_Payment_Gateway">
+        <di:waypoint x="2070" y="528" /><di:waypoint x="2142" y="528" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_OrderCompletedYes_di" bpmnElement="Flow_OrderCompletedYes">
+        <di:waypoint x="2192" y="528" /><di:waypoint x="2320" y="528" />
+        <bpmndi:BPMNLabel><dc:Bounds x="2247" y="507" width="18" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_OrderNotCompleted_di" bpmnElement="Flow_OrderNotCompleted">
+        <di:waypoint x="2167" y="553" /><di:waypoint x="2167" y="638" />
+        <bpmndi:BPMNLabel><dc:Bounds x="2178" y="596" width="14" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Release_Notify_di" bpmnElement="Flow_Release_Notify">
+        <di:waypoint x="2229" y="687" /><di:waypoint x="2290" y="687" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Notify_End_di" bpmnElement="Flow_Notify_End">
+        <di:waypoint x="2412" y="687" /><di:waypoint x="2479" y="687" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_DMN_di" bpmnElement="Association_DMN">
+        <di:waypoint x="1096" y="516" /><di:waypoint x="1158" y="268" />
+      </bpmndi:BPMNEdge>
+
+      <!-- message flows to the collapsed service pool -->
+      <bpmndi:BPMNEdge id="MessageFlow_StockQuery_di" bpmnElement="MessageFlow_StockQuery">
+        <di:waypoint x="413" y="613" /><di:waypoint x="413" y="857" />
+        <bpmndi:BPMNLabel><dc:Bounds x="419" y="806" width="58" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_ProducerData_di" bpmnElement="MessageFlow_ProducerData">
+        <di:waypoint x="851" y="613" /><di:waypoint x="851" y="857" />
+        <bpmndi:BPMNLabel><dc:Bounds x="857" y="806" width="70" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_Reserve_di" bpmnElement="MessageFlow_Reserve">
+        <di:waypoint x="1680" y="577" /><di:waypoint x="1680" y="857" />
+        <bpmndi:BPMNLabel><dc:Bounds x="1690" y="806" width="40" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_Release_di" bpmnElement="MessageFlow_Release">
+        <di:waypoint x="2167" y="735" /><di:waypoint x="2167" y="857" />
+        <bpmndi:BPMNLabel><dc:Bounds x="2170" y="808" width="36" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+
+  <!-- ================= Diagram: drill-down into Payment and Fulfilment ================= -->
+  <bpmndi:BPMNDiagram id="BPMNDiagram_PaymentFulfilment">
+    <bpmndi:BPMNPlane id="BPMNPlane_PaymentFulfilment" bpmnElement="Activity_PaymentFulfilment">
+      <bpmndi:BPMNShape id="Sub_Start_di" bpmnElement="Sub_Start">
+        <dc:Bounds x="180" y="182" width="36" height="36" />
+        <bpmndi:BPMNLabel><dc:Bounds x="164" y="225" width="68" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sub_Task_TakePayment_di" bpmnElement="Sub_Task_TakePayment">
+        <dc:Bounds x="270" y="160" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sub_Gateway_PaymentOk_di" bpmnElement="Sub_Gateway_PaymentOk" isMarkerVisible="true">
+        <dc:Bounds x="425" y="175" width="50" height="50" />
+        <bpmndi:BPMNLabel><dc:Bounds x="410" y="138" width="80" height="27" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sub_Task_ConfirmProducers_di" bpmnElement="Sub_Task_ConfirmProducers">
+        <dc:Bounds x="530" y="160" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sub_End_Fulfilled_di" bpmnElement="Sub_End_Fulfilled">
+        <dc:Bounds x="692" y="182" width="36" height="36" />
+        <bpmndi:BPMNLabel><dc:Bounds x="668" y="225" width="85" height="27" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Sub_End_PaymentFailed_di" bpmnElement="Sub_End_PaymentFailed">
+        <dc:Bounds x="432" y="292" width="36" height="36" />
+        <bpmndi:BPMNLabel><dc:Bounds x="414" y="335" width="73" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Sub_Flow_Start_Pay_di" bpmnElement="Sub_Flow_Start_Pay">
+        <di:waypoint x="216" y="200" /><di:waypoint x="270" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Sub_Flow_Pay_Gateway_di" bpmnElement="Sub_Flow_Pay_Gateway">
+        <di:waypoint x="370" y="200" /><di:waypoint x="425" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Sub_Flow_PaymentOk_di" bpmnElement="Sub_Flow_PaymentOk">
+        <di:waypoint x="475" y="200" /><di:waypoint x="530" y="200" />
+        <bpmndi:BPMNLabel><dc:Bounds x="494" y="182" width="18" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Sub_Flow_PaymentFailed_di" bpmnElement="Sub_Flow_PaymentFailed">
+        <di:waypoint x="450" y="225" /><di:waypoint x="450" y="292" />
+        <bpmndi:BPMNLabel><dc:Bounds x="458" y="252" width="14" height="14" /></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Sub_Flow_Confirm_End_di" bpmnElement="Sub_Flow_Confirm_End">
+        <di:waypoint x="630" y="200" /><di:waypoint x="692" y="200" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
