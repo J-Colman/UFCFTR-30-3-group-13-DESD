@@ -34,6 +34,7 @@ A simple example: a basket might contain eggs from one producer and bread from a
 - A basket containing items from more than one producer
 - Checking product availability and stock
 - Identifying the producers involved
+- Displaying product allergen and nutritional information
 - Working out delivery or collection arrangements
 - The customer reviewing and confirming the order
 - Creating the overall marketplace order

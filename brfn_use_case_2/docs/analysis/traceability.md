@@ -69,7 +69,7 @@ The requirements IDs come from `docs/planning/start_on_the_requirements_shortene
 | G4 | Login is required by NFR1 but there is no process step for it. | Add the step, or state where it is handled | Ada / Izzy |
 | G5 | Commission only runs for multi-vendor orders in the BPMN. The SD image uses goods plus delivery, while scope says order value. The calculation basis needs to be agreed before it is automated. | Agree when it applies and what it is based on | Group |
 | G6 | `R6` is deferred in scope, Must Have in the backlog and absent from the FR/NFRs. That contradiction will show up in the Sprint 2 review if it is not resolved. | Downgrade it, or add it to F2 | Aman / Josh |
-| G7 | `R7` is out of scope in `scope.md`, but its product data is required by FR2 and NFR9. | Bring it into F1, or change the requirements | Aman / Josh |
+| G7 | `R7` is out of scope in `scope.md`, but its product data is required by FR2 and NFR9. | Bring it into F1 | Aman / Josh |
 | G8 | No backlog items for producer notification, stock updates or order records. This leaves F2 acceptance criteria without backlog coverage. | Add them | Aman |
 | G9 | Operational gateway errors remain in the repo, and the strategic BPMN has no retry path. The operational model cannot be presented as executable until these are fixed. | Commit the `#13` fixes, and add the retry path or justify leaving it out | Ada |
 | G10 | One operational model covers F1 and F2, but the brief needs one per functionality. | Build the second model | Ada / Izzy |
