@@ -45,7 +45,7 @@ UFCFTR-30-3-group-13-DESD/
     ├── assessment/
     │   ├── assessment-brief-task-1.pdf
     │   ├── case-study.pdf
-    │   ├── contributions-matrix-template.docx
+    │   ├── contributions-matrix-draft.odt
     │   └── task-1-use-cases.pdf
     ├── models/
     │   ├── strategic-bpmn.bpmn
@@ -60,11 +60,9 @@ UFCFTR-30-3-group-13-DESD/
     │   ├── case-2-operational-bpmn.bpmn
     │   └── case-2-operational-bpmn.png
     └── planning/
-        ├── gantt-chart.pdf
         ├── gantt-chart.png
-        ├── master-backlog.md
+        ├── master-backlog.odt
         ├── moscow-prioritisation.md
-        ├── product-backlog.md
         ├── scope.md
         ├── sprint-1-checklist.png
         ├── sprint-1-week-1-plan.md
@@ -98,13 +96,12 @@ UFCFTR-30-3-group-13-DESD/
 | Case 2 Operational BPMN | Ada | [docs/models/case-2-operational-bpmn.bpmn](docs/models/case-2-operational-bpmn.bpmn) | Draft committed; gateway fixes in Sprint 2 |
 | Case 2 Operational BPMN Image | Ada | [docs/models/case-2-operational-bpmn.png](docs/models/case-2-operational-bpmn.png) | Draft committed |
 | Scope and Functionality Confirmation | Joshua | [docs/planning/scope.md](docs/planning/scope.md) | Confirmed (#11) |
-| Master Backlog | Aman | [docs/planning/master-backlog.md](docs/planning/master-backlog.md) | Committed; canonical backlog |
-| Product Backlog | Aman | [docs/planning/product-backlog.md](docs/planning/product-backlog.md) | Committed; legacy view |
+| Master Backlog | Aman | [docs/planning/master-backlog.md](docs/planning/master-backlog.odt) | Committed; canonical backlog |
 | MoSCoW Prioritisation | Aman | [docs/planning/moscow-prioritisation.md](docs/planning/moscow-prioritisation.md) | Committed |
 | Sprint 1 Plan | Joshua | [docs/planning/sprint-1-week-1-plan.md](docs/planning/sprint-1-week-1-plan.md) | Committed |
 | Gantt Chart | Aman | [docs/planning/gantt-chart.png](docs/planning/gantt-chart.png) | Committed |
 | Sprint 1 Checklist | Aman | [docs/planning/sprint-1-checklist.png](docs/planning/sprint-1-checklist.png) | Committed |
-| Contribution Matrix Draft | Joshua | [docs/contribution-matrix/contribution-matrix-sprint-1-draft.md](docs/contribution-matrix/contribution-matrix-sprint-1-draft.md) | Pending group agreement (#9) |
+| Contribution Matrix Draft | Joshua | [docs/contribution-matrix/contribution-matrix-draft.odt](docs/contribution-matrix/contribution-matrix-draft.odt) | Pending group agreement (#9) |
 | Sprint 1 Kanban | Joshua | [GitHub Project](https://github.com/users/J-Colman/projects/4) | Public, linked to repo, 14 items |
 | README | Joshua | [README.md](README.md) | Committed |
 
