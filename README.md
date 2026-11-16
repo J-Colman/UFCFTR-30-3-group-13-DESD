@@ -40,6 +40,10 @@ UFCFTR-30-3-group-13-DESD/
 ├── .gitignore
 └── models/
     └── bpmn
+        └── camunnda/
+            ├── case-2-operational-bpmn.bpmn
+            ├── strategic-bpmn.bpmn
+            └── BRFM CHECKOUT AND ORDER CREATION.bpmn
         ├── case-2-operational-bpmn.png
         ├── BRFN CHECKOUT AND ORDER CREATION.png
         └── strategic-bpmn.png
@@ -74,11 +78,7 @@ UFCFTR-30-3-group-13-DESD/
         └── task-1-use-cases.pdf
     └── meetings/
         └── meeting-notes-04-11-2026.docx
-└── camunnda/
-    ├── brfn-checkout-order-creation.bpmn
-    ├── case-2-operational-bpmn.bpmn
-    ├── strategic-bpmn.bpmn
-    └── BRFM CHECKOUT AND ORDER CREATION.bpmn
+
 ```
 
 ---
