@@ -38,27 +38,23 @@ UFCFTR-30-3-group-13-DESD/
 ├── uv.lock
 ├── .python-version
 ├── .gitignore
+└── models/
+    └── bpmn
+        ├── case-2-operational-bpmn.png
+        ├── BRFN CHECKOUT AND ORDER CREATION.png
+        └── strategic-bpmn.png
+    └── istar
+        ├── Goal Diagram iSD Model Case 2.pdf
+        ├── Goal Diagram iSR Model Case 2.pdf
+        ├── case-2-i-star-sd-model.png
+        ├── case-2-i-star-sr-model.json
+        └── case-2-i-star-sr-model.png
+    └── uml
+        ├── case-2-class-diagram.pdf
+        ├── case-2-component-diagram.pdf
+        ├── case-2-sequence-diagram.pdf
+        └── case-2-use-case-diagram.pdf
 └── docs/
-    ├── analysis/
-    │   ├── stakeholder-analysis.docx
-    │   └── traceability.md
-    ├── assessment/
-    │   ├── assessment-brief-task-1.pdf
-    │   ├── case-study.pdf
-    │   ├── contributions-matrix-draft.odt
-    │   └── task-1-use-cases.pdf
-    ├── models/
-    │   ├── strategic-bpmn.bpmn
-    │   ├── strategic-bpmn.png
-    │   ├── case-2-use-case-diagram.pdf
-    │   ├── case-2-class-diagram.pdf
-    │   ├── case-2-component-diagram.pdf
-    │   ├── case-2-sequence-diagram.pdf
-    │   ├── case-2-i-star-sd-model.png
-    │   ├── case-2-i-star-sr-model.png
-    │   ├── case-2-i-star-sr-model.json
-    │   ├── case-2-operational-bpmn.bpmn
-    │   └── case-2-operational-bpmn.png
     └── planning/
         ├── gantt-chart.png
         ├── master-backlog.odt
@@ -68,6 +64,21 @@ UFCFTR-30-3-group-13-DESD/
         ├── sprint-1-week-1-plan.md
         ├── start on the requirements.docx
         └── start_on_the_requirements_shortened.docx
+    └── analysis/
+        ├── stakeholder-analysis.docx
+        └── traceability.md
+    └── assessment/
+        ├── assessment-brief-task-1.pdf
+        ├── case-study.pdf
+        ├── contributions-matrix-draft.odt
+        └── task-1-use-cases.pdf
+    └── meetings/
+        └── meeting-notes-04-11-2026.docx
+└── camunnda/
+    ├── brfn-checkout-order-creation.bpmn
+    ├── case-2-operational-bpmn.bpmn
+    ├── strategic-bpmn.bpmn
+    └── BRFM CHECKOUT AND ORDER CREATION.bpmn
 ```
 
 ---
