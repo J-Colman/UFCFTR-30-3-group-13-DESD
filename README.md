@@ -114,6 +114,11 @@ UFCFTR-30-3-group-13-DESD/
 | Sprint 1 Checklist | Aman | [docs/planning/sprint-1-checklist.png](docs/planning/sprint-1-checklist.png) | Committed |
 | Contribution Matrix Draft | Joshua | [docs/contribution-matrix/contribution-matrix-draft.odt](docs/contribution-matrix/contribution-matrix-draft.odt) | Pending group agreement (#9) |
 | Sprint 1 Kanban | Joshua | [GitHub Project](https://github.com/users/J-Colman/projects/4) | Public, linked to repo, 14 items |
+
+| Order creation and checkout bpmn | Yonas, Aman | [docs/planning/sprint-1-checklist.png](models/bpmn/BRFN%20CHECKOUT%20AND%20ORDER%20CREATION.png) | Committed |
+| Initial order creation and checkout bpmn automation | Aman, Ada | [docs/planning/sprint-1-checklist.png](models/bpmn/camunda/BRFN CHECKOUT AND ORDER CREATION.bpmn) | Pending, In progress |
+| Sprint 2 Checklist | Aman | [docs/planning/sprint-1-checklist.png](docs/planning/sprint-2-checklist.png) | Committed |
+
 | README | Joshua | [README.md](README.md) | Committed |
 
 ---
@@ -125,7 +130,7 @@ UFCFTR-30-3-group-13-DESD/
 - [Traceability Matrix](docs/analysis/traceability.md)
 - [Gantt Chart](docs/planning/gantt-chart.png)
 - [Sprint 1 Plan](docs/planning/sprint-1-week-1-plan.md)
-- [MoSCoW Prioritisation](docs/planning/moscow-prioritisation.md)
+- [Master Backlog](docs/planning/master-backlog.odt)
 
 ---
 
