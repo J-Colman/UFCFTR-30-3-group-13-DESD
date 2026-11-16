@@ -117,7 +117,6 @@ UFCFTR-30-3-group-13-DESD/
 | Order creation and checkout bpmn | Yonas, Aman | [docs/planning/sprint-1-checklist.png](models/bpmn/BRFN%20CHECKOUT%20AND%20ORDER%20CREATION.png) | Committed |
 | Initial order creation and checkout bpmn automation | Aman, Ada | [docs/planning/sprint-1-checklist.png](models/bpmn/camunda/BRFN CHECKOUT AND ORDER CREATION.bpmn) | Pending, In progress |
 | Sprint 2 Checklist | Aman | [docs/planning/sprint-1-checklist.png](docs/planning/sprint-2-checklist.png) | Committed |
-
 | README | Joshua | [README.md](README.md) | Committed |
 
 ---
