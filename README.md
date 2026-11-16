@@ -114,9 +114,9 @@ UFCFTR-30-3-group-13-DESD/
 | Sprint 1 Checklist | Aman | [docs/planning/sprint-1-checklist.png](docs/planning/sprint-1-checklist.png) | Committed |
 | Contribution Matrix Draft | Joshua | [docs/contribution-matrix/contribution-matrix-draft.odt](docs/contribution-matrix/contribution-matrix-draft.odt) | Pending group agreement (#9) |
 | Sprint 1 Kanban | Joshua | [GitHub Project](https://github.com/users/J-Colman/projects/4) | Public, linked to repo, 14 items |
-| Order creation and checkout bpmn | Yonas, Aman | [docs/planning/sprint-1-checklist.png](models/bpmn/BRFN%20CHECKOUT%20AND%20ORDER%20CREATION.png) | Committed |
-| Initial order creation and checkout bpmn automation | Aman, Ada | [docs/planning/sprint-1-checklist.png](models/bpmn/camunda/BRFN CHECKOUT AND ORDER CREATION.bpmn) | Pending, In progress |
-| Sprint 2 Checklist | Aman | [docs/planning/sprint-1-checklist.png](docs/planning/sprint-2-checklist.png) | Committed |
+| Order creation and checkout bpmn | Yonas, Aman | [models/bpmn/camunda/BRFN CHECKOUT AND ORDER CREATION.bpmn](models/bpmn/BRFN%20CHECKOUT%20AND%20ORDER%20CREATION.png) | Committed |
+| Initial order creation and checkout bpmn automation | Aman, Ada | [models/bpmn/camunda/BRFN CHECKOUT AND ORDER CREATION.bpmn](models/bpmn/camunda/BRFN CHECKOUT AND ORDER CREATION.bpmn) | Pending, In progress |
+| Sprint 2 Checklist | Aman | [docs/planning/sprint-2-checklist.png](docs/planning/sprint-2-checklist.png) | Committed |
 | README | Joshua | [README.md](README.md) | Committed |
 
 ---
