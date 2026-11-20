@@ -36,7 +36,7 @@
     {
       "id": "b700b801-6b4d-5d14-92c6-fdc60216ccb9",
       "text": "Customer",
-      "type": "istar.Role",
+      "type": "istar.Actor",
       "x": 80,
       "y": 420,
       "customProperties": {
@@ -47,7 +47,7 @@
     {
       "id": "744b604e-239b-5320-818a-8e202571021c",
       "text": "BRFN Platform",
-      "type": "istar.Agent",
+      "type": "istar.Actor",
       "x": 640,
       "y": 420,
       "customProperties": {
@@ -58,7 +58,7 @@
     {
       "id": "c955c60e-e58b-5261-9b8c-56635ed6b456",
       "text": "Producer",
-      "type": "istar.Role",
+      "type": "istar.Actor",
       "x": 1240,
       "y": 500,
       "customProperties": {
@@ -674,13 +674,16 @@
   ],
   "display": {
     "b700b801-6b4d-5d14-92c6-fdc60216ccb9": {
-      "backgroundColor": "#65FA2B"
+      "backgroundColor": "#65FA2B",
+      "collapsed": true
     },
     "744b604e-239b-5320-818a-8e202571021c": {
-      "backgroundColor": "#FAA62E"
+      "backgroundColor": "#FAA62E",
+      "collapsed": true
     },
     "c955c60e-e58b-5261-9b8c-56635ed6b456": {
-      "backgroundColor": "#4EFA30"
+      "backgroundColor": "#4EFA30",
+      "collapsed": true
     },
     "9928a730-e67f-522a-9088-4041ede0a265": {
       "backgroundColor": "#D0F4FA"
@@ -733,13 +736,16 @@
       ]
     },
     "b25669ae-6a87-5323-a8c9-ed100716ba01": {
-      "collapsed": true
+      "collapsed": true,
+      "backgroundColor": "#F8D3CF"
     },
     "870e896c-d88e-5429-ad0c-93f415b10798": {
-      "collapsed": true
+      "collapsed": true,
+      "backgroundColor": "#F8E3C4"
     },
     "09669c59-c9f7-5572-accf-d15edfa41d57": {
-      "collapsed": true
+      "collapsed": true,
+      "backgroundColor": "#F8E3C4"
     }
   },
   "tool": "pistar.2.1.0",
@@ -750,7 +756,7 @@
     "height": 980,
     "name": "BRFN Digital Marketplace — Strategic Dependency (SD) model",
     "customProperties": {
-      "Description": "Who depends on whom for what in the BRFN online marketplace. Actors are collapsed. The platform is an Agent (a concrete system: Camunda 8 processes F1 Checkout, F2 Payment & Fulfilment, F3 Weekly Settlement); Customer and Producer are Roles because many households, groups, restaurants and ~40 SMEs play them."
+      "Description": "Who depends on whom for what in the BRFN online marketplace. Actors are collapsed. All six participants are modelled as plain iStar actors (full circles): Customer, BRFN Platform, Producer, Payment Provider, Operations Team and Local Authority. The BRFN Platform runs Camunda 8 processes F1 Checkout, F2 Payment & Fulfilment and F3 Weekly Settlement."
     }
   }
 }

@@ -3,7 +3,7 @@
     {
       "id": "b700b801-6b4d-5d14-92c6-fdc60216ccb9",
       "text": "Customer",
-      "type": "istar.Role",
+      "type": "istar.Actor",
       "x": 83,
       "y": 81,
       "customProperties": {
@@ -85,7 +85,7 @@
     {
       "id": "744b604e-239b-5320-818a-8e202571021c",
       "text": "BRFN Platform",
-      "type": "istar.Agent",
+      "type": "istar.Actor",
       "x": 502,
       "y": 63,
       "customProperties": {
@@ -337,7 +337,7 @@
     {
       "id": "c955c60e-e58b-5261-9b8c-56635ed6b456",
       "text": "Producer",
-      "type": "istar.Role",
+      "type": "istar.Actor",
       "x": 1897,
       "y": 81,
       "customProperties": {
@@ -1010,13 +1010,16 @@
       "backgroundColor": "#4EFA30"
     },
     "b25669ae-6a87-5323-a8c9-ed100716ba01": {
-      "backgroundColor": "#F8D3CF"
+      "backgroundColor": "#F8D3CF",
+      "collapsed": true
     },
     "870e896c-d88e-5429-ad0c-93f415b10798": {
-      "backgroundColor": "#F8E3C4"
+      "backgroundColor": "#F8E3C4",
+      "collapsed": true
     },
     "09669c59-c9f7-5572-accf-d15edfa41d57": {
-      "backgroundColor": "#F8E3C4"
+      "backgroundColor": "#F8E3C4",
+      "collapsed": true
     }
   },
   "tool": "pistar.2.1.0",
