@@ -1,0 +1,22 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.10.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "1921008"
+  },
+  "schemaVersion": 19,
+  "id": "Form_1fipen9",
+  "components": [
+    {
+      "text": "Your basket is ready for checkout",
+      "type": "text",
+      "layout": {
+        "row": "Row_1yb1x0j",
+        "columns": null
+      },
+      "id": "Field_1mcp0rw"
+    }
+  ],
+  "type": "default"
+}
