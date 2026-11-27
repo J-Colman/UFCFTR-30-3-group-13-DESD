@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="delivery-options-table" name="Delivery Options Table" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Web Modeler" exporterVersion="4c2418b" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.10.0">
+  <decision id="delivery-options" name="Delivery Options">
+    <decisionTable id="DecisionTable_0un0jiq" hitPolicy="COLLECT">
+      <input id="InputClause_1y940ln" label="Offers Delivery?">
+        <inputExpression id="LiteralExpression_17lfhxc" typeRef="boolean">
+          <text>producer.offersDelivery</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Option" name="option" typeRef="string" />
+      <rule id="DecisionRule_086gekx">
+        <inputEntry id="UnaryTests_07bt7kb">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1seye9j">
+          <text>"collection"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1bshbz8">
+        <inputEntry id="UnaryTests_1wt5weo">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0il0wpo">
+          <text>"delivery"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="delivery-options">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
