@@ -8,10 +8,10 @@ The Bristol Regional Food Network is a community digital marketplace connecting 
 
 | Name | GitHub Handle | Role |
 | --- | --- | --- |
-| Joshua | [@J-Colman](https://github.com/J-Colman) | Lead / Integration |
-| Izzy | [@Awesometeapot1](https://github.com/Awesometeapot1) | Business Analyst / Requirements |
-| Ada | [@aido77](https://github.com/aido77) | BPMN Modeller |
-| Aman | [@N30NW1LD-2005](https://github.com/N30NW1LD-2005) | Product Owner / Planning |
+| Joshua | [@J-Colman](https://github.com/J-Colman) | Lead / Integration / BPMN |
+| Izzy | [@Awesometeapot1](https://github.com/Awesometeapot1) | Business Analyst / Requirements / F2 BPMN|
+| Ada | [@aido77](https://github.com/aido77) | BPMN Modeller / Camunda Automation |
+| Aman | [@N30NW1LD-2005](https://github.com/N30NW1LD-2005) | Product Owner / Planning, Camunda Forms |
 | Yonas | [@yonas1212](https://github.com/yonas1212) | Modelling / Analysis |
 
 ---
@@ -34,50 +34,70 @@ Both functionalities are scoped from Case 2. See [docs/planning/scope.md](docs/p
 ```text
 UFCFTR-30-3-group-13-DESD/
 ├── README.md
-├── pyproject.toml
-├── uv.lock
-├── .python-version
+├── requirements.txt
 ├── .gitignore
+├── automation/
+    ├── main.py
+    ├── test_workers.py
+    └── workers.py
+├── docs/
+    └── analysis/
+        ├── stakeholder-analysis.docx
+        └── traceability-matrix.docx
+    └── assessment/
+        ├── assessment-brief-task-1.pdf
+        ├── case-study.pdf
+        ├── contributions-matrix-draft.docx
+        └── task-1-use-cases.pdf
+    └── meetings/
+        └── meeting-notes-04-11-2026.docx
+    └── planning/
+        ├── gantt-chart.png
+        ├── master-backlog-sprint-3.pdf
+        ├── moscow-prioritisation.md
+        ├── scope.md
+        ├── sprint-1-checklist.png
+        ├── sprint-1-week-1-plan.md
+        ├── sprint-2-checklist.png
+        ├── start on the requirements.docx
+        ├── start_on_the_requirements_shortened.docx
+        └── Whats to be done.txt
 └── models/
-    └── bpmn
-        └── camunnda/
-            ├── case-2-operational-bpmn.bpmn
+    └── camunda/
+        └── bpmn/
+            └── sub-processes/
+                ├── bpmn-authenticate-customer.bpmn
+                └── bpmn-authenticate-customer.png
+            ├── operational-bpmn-f1-checkout.bpmn
+            ├── operational-bpmn-f1-checkout.png
+            ├── operational-bpmn-f2-payment.bpmn
+            ├── operational-bpmn-f2-payment.png
             ├── strategic-bpmn.bpmn
-            └── BRFM CHECKOUT AND ORDER CREATION.bpmn
-        ├── case-2-operational-bpmn.png
-        ├── BRFN CHECKOUT AND ORDER CREATION.png
-        └── strategic-bpmn.png
+            └── strategic-bpmn.png
+        └── dmn/
+            └── delivery-options-table.dmn
+        └── forms/
+            ├── add-to-basket.form
+            ├── amend-basket.form
+            ├── browse-products.form
+            ├── choose-delivery-options.form
+            ├── enter-payment-details.form
+            ├── login-or-signup.form
+            ├── login.form
+            ├── proceed-to-checkout.form
+            ├── retry-or-cancel-payment.form
+            ├── review-order.form
+            └── sign-up.form
     └── istar
-        ├── Goal Diagram iSD Model Case 2.pdf
-        ├── Goal Diagram iSR Model Case 2.pdf
-        ├── case-2-i-star-sd-model.png
-        ├── case-2-i-star-sr-model.json
-        └── case-2-i-star-sr-model.png
+        ├── brfn-istar-SD1.text
+        ├── brfn-istar-SR1.text
+        ├── Goal_Diagram_i*SD1_Model_Case_2.pdf
+        └── Goal_Diagram_i*SR1_Model_Case_2.pdf
     └── uml
         ├── case-2-class-diagram.pdf
         ├── case-2-component-diagram.pdf
         ├── case-2-sequence-diagram.pdf
         └── case-2-use-case-diagram.pdf
-└── docs/
-    └── planning/
-        ├── gantt-chart.png
-        ├── master-backlog.odt
-        ├── moscow-prioritisation.md
-        ├── scope.md
-        ├── sprint-1-checklist.png
-        ├── sprint-1-week-1-plan.md
-        ├── start on the requirements.docx
-        └── start_on_the_requirements_shortened.docx
-    └── analysis/
-        ├── stakeholder-analysis.docx
-        └── traceability.md
-    └── assessment/
-        ├── assessment-brief-task-1.pdf
-        ├── case-study.pdf
-        ├── contributions-matrix-draft.odt
-        └── task-1-use-cases.pdf
-    └── meetings/
-        └── meeting-notes-04-11-2026.docx
 
 ```
 
@@ -87,93 +107,113 @@ UFCFTR-30-3-group-13-DESD/
 
 | Artefact | Owner | Location | Status |
 | --- | --- | --- | --- |
-| Assessment Brief | Module team | [docs/assessment/assessment-brief-task-1.pdf](docs/assessment/assessment-brief-task-1.pdf) | Reference copy committed |
-| Case Study | Module team | [docs/assessment/case-study.pdf](docs/assessment/case-study.pdf) | Reference copy committed |
-| Task 1 Use Cases | Module team | [docs/assessment/task-1-use-cases.pdf](docs/assessment/task-1-use-cases.pdf) | Reference copy committed |
-| Contribution Matrix Template | Module team | [docs/assessment/contributions-matrix-template.docx](docs/assessment/contributions-matrix-template.docx) | Reference copy committed |
-| Stakeholder Analysis | Izzy | [docs/analysis/stakeholder-analysis.docx](docs/analysis/stakeholder-analysis.docx) | Committed |
-| Traceability Matrix | Joshua | [docs/analysis/traceability.md](docs/analysis/traceability.md) | Draft committed (#10) |
-| FR/NFR Analysis | Izzy | [docs/planning/start_on_the_requirements_shortened.docx](docs/planning/start_on_the_requirements_shortened.docx) | Committed; in review (#12) |
-| Major Process List | Yonas | `docs/analysis/major-process-list.md` | Pending #5 |
-| Strategic BPMN | Ada | [docs/models/strategic-bpmn.bpmn](docs/models/strategic-bpmn.bpmn) | Updated 28 October (#4); traceability not yet updated |
-| Strategic BPMN Image | Ada | [docs/models/strategic-bpmn.png](docs/models/strategic-bpmn.png) | Updated 28 October |
-| Case 2 Use Case Diagram | Yonas | [docs/models/case-2-use-case-diagram.pdf](docs/models/case-2-use-case-diagram.pdf) | Committed |
-| Case 2 Class Diagram | Yonas | [docs/models/case-2-class-diagram.pdf](docs/models/case-2-class-diagram.pdf) | Committed |
-| Case 2 Component Diagram | Yonas | [docs/models/case-2-component-diagram.pdf](docs/models/case-2-component-diagram.pdf) | Committed |
-| Case 2 Sequence Diagram | Yonas | [docs/models/case-2-sequence-diagram.pdf](docs/models/case-2-sequence-diagram.pdf) | Committed |
-| i* SD Model | Yonas | [docs/models/case-2-i-star-sd-model.png](docs/models/case-2-i-star-sd-model.png) | WIP committed; Sprint 2 summative |
-| i* SR Model | Yonas | [docs/models/case-2-i-star-sr-model.png](docs/models/case-2-i-star-sr-model.png) | WIP committed; Sprint 2 summative |
-| i* SR piStar Source | Yonas | [docs/models/case-2-i-star-sr-model.json](docs/models/case-2-i-star-sr-model.json) | Committed |
-| Case 2 Operational BPMN | Ada | [docs/models/case-2-operational-bpmn.bpmn](docs/models/case-2-operational-bpmn.bpmn) | Draft committed; gateway fixes in Sprint 2 |
-| Case 2 Operational BPMN Image | Ada | [docs/models/case-2-operational-bpmn.png](docs/models/case-2-operational-bpmn.png) | Draft committed |
-| Scope and Functionality Confirmation | Joshua | [docs/planning/scope.md](docs/planning/scope.md) | Confirmed (#11) |
-| Master Backlog | Aman | [docs/planning/master-backlog.md](docs/planning/master-backlog.odt) | Committed; canonical backlog |
-| MoSCoW Prioritisation | Aman | [docs/planning/moscow-prioritisation.md](docs/planning/moscow-prioritisation.md) | Committed |
-| Sprint 1 Plan | Joshua | [docs/planning/sprint-1-week-1-plan.md](docs/planning/sprint-1-week-1-plan.md) | Committed |
-| Gantt Chart | Aman | [docs/planning/gantt-chart.png](docs/planning/gantt-chart.png) | Committed |
-| Sprint 1 Checklist | Aman | [docs/planning/sprint-1-checklist.png](docs/planning/sprint-1-checklist.png) | Committed |
-| Contribution Matrix Draft | Joshua | [docs/contribution-matrix/contribution-matrix-draft.odt](docs/contribution-matrix/contribution-matrix-draft.odt) | Pending group agreement (#9) |
-| Sprint 1 Kanban | Joshua | [GitHub Project](https://github.com/users/J-Colman/projects/4) | Public, linked to repo, 14 items |
-| Order creation and checkout bpmn | Yonas, Aman | [models/bpmn/camunda/BRFN CHECKOUT AND ORDER CREATION.bpmn](models/bpmn/BRFN%20CHECKOUT%20AND%20ORDER%20CREATION.png) | Committed |
-| Initial order creation and checkout bpmn automation | Aman, Ada | [models/bpmn/camunda/BRFN CHECKOUT AND ORDER CREATION.bpmn](models/bpmn/camunda/BRFN CHECKOUT AND ORDER CREATION.bpmn) | Pending, In progress |
-| Sprint 2 Checklist | Aman | [docs/planning/sprint-2-checklist.png](docs/planning/sprint-2-checklist.png) | Committed |
-| README | Joshua | [README.md](README.md) | Committed |
+| Assessment Brief | Module team | [docs/assessment/assessment-brief-task-1.pdf](docs/assessment/assessment-brief-task-1.pdf) | Reference copy |
+| Case Study | Module team | [docs/assessment/case-study.pdf](docs/assessment/case-study.pdf) | Reference copy |
+| Task 1 Use Cases | Module team | [docs/assessment/task-1-use-cases.pdf](docs/assessment/task-1-use-cases.pdf) | Reference copy |
+| Stakeholder Analysis | Izzy | [docs/analysis/stakeholder-analysis.docx](docs/analysis/stakeholder-analysis.docx) | Complete |
+| FR/NFR Analysis (draft) | Izzy | [docs/planning/start on the requirements.docx](<docs/planning/start on the requirements.docx>) | Superseded by the shortened version |
+| FR/NFR Analysis with Test Criteria | Izzy | [docs/planning/start_on_the_requirements_shortened.docx](docs/planning/start_on_the_requirements_shortened.docx) | Complete (#12) |
+| Scope and Functionality Confirmation | Joshua | [docs/planning/scope.md](docs/planning/scope.md) | Confirmed with module team (#11) |
+| Major Process List | Yonas | — | Not delivered (#5) |
+| Traceability Matrix | Joshua | [docs/analysis/traceability-matrix.docx](docs/analysis/traceability-matrix.docx) | Sprint 2 version (#20) |
+| i\* Strategic Dependency Model | Yonas | [models/istar/Goal_Diagram_i\*SD1_Model_Case_2.pdf](<models/istar/Goal_Diagram_i*SD1_Model_Case_2.pdf>) | Complete |
+| i\* Strategic Dependency Source (piStar) | Yonas | [models/istar/brfn-istar-SD1.text](models/istar/brfn-istar-SD1.text) | Complete |
+| i\* Strategic Rationale Model | Yonas | [models/istar/Goal_Diagram_i\*SR1_Model_Case_2.pdf](<models/istar/Goal_Diagram_i*SR1_Model_Case_2.pdf>) | Complete |
+| i\* Strategic Rationale Source (piStar) | Yonas | [models/istar/brfn-istar-SR1.text](models/istar/brfn-istar-SR1.text) | Complete |
+| Strategic BPMN | Ada | [models/camunda/bpmn/strategic-bpmn.bpmn](models/camunda/bpmn/strategic-bpmn.bpmn) | Complete (#4) |
+| Strategic BPMN Image | Ada | [models/camunda/bpmn/strategic-bpmn.png](models/camunda/bpmn/strategic-bpmn.png) | Complete |
+| Operational BPMN F1: Checkout | Joshua, Yonas | [models/camunda/bpmn/operational-bpmn-f1-checkout.bpmn](models/camunda/bpmn/operational-bpmn-f1-checkout.bpmn) | Deployed and tested in Camunda |
+| Operational BPMN F1 Image | Joshua, Yonas | [models/camunda/bpmn/operational-bpmn-f1-checkout.png](models/camunda/bpmn/operational-bpmn-f1-checkout.png) | Complete |
+| Operational BPMN F2: Payment | Joshua, Izzy | [models/camunda/bpmn/operational-bpmn-f2-payment.bpmn](models/camunda/bpmn/operational-bpmn-f2-payment.bpmn) | Modelled; workers in progress |
+| Operational BPMN F2 Image | Joshua, Izzy | [models/camunda/bpmn/operational-bpmn-f2-payment.png](models/camunda/bpmn/operational-bpmn-f2-payment.png) | Complete |
+| Authenticate Customer Sub-process | Joshua | [models/camunda/bpmn/sub-processes/bpmn-authenticate-customer.bpmn](models/camunda/bpmn/sub-processes/bpmn-authenticate-customer.bpmn) | Deployed and tested in Camunda |
+| Authenticate Customer Image | Joshua | [models/camunda/bpmn/sub-processes/bpmn-authenticate-customer.png](models/camunda/bpmn/sub-processes/bpmn-authenticate-customer.png) | Complete |
+| Delivery Options Decision (DMN) | Joshua | [models/camunda/dmn/delivery-options-table.dmn](models/camunda/dmn/delivery-options-table.dmn) | Deployed and tested in Camunda |
+| Camunda Forms (11) | Aman, Joshua | [models/camunda/forms/](models/camunda/forms/) | Complete |
+| Job Workers | Ada, Aman | [automation/workers.py](automation/workers.py) | F1 and login in progress; F2 in progress |
+| Worker Entry Point | Ada, Aman, Joshua | [automation/main.py](automation/main.py) | Complete |
+| Worker Tests | Ada, Aman | [automation/test_workers.py](automation/test_workers.py) | In progress |
+| Python Dependencies | Ada, Aman | [requirements.txt](requirements.txt) | Complete |
+| UML Use Case Diagram | Yonas | [models/uml/case-2-use-case-diagram.pdf](models/uml/case-2-use-case-diagram.pdf) | Complete |
+| UML Class Diagram | Yonas | [models/uml/case-2-class-diagram.pdf](models/uml/case-2-class-diagram.pdf) | Complete |
+| UML Component Diagram | Yonas | [models/uml/case-2-component-diagram.pdf](models/uml/case-2-component-diagram.pdf) | Complete |
+| UML Sequence Diagram | Yonas | [models/uml/case-2-sequence-diagram.pdf](models/uml/case-2-sequence-diagram.pdf) | Complete |
+| Master Backlog | Aman, Joshua | [docs/planning/master-backlog-sprint-3.pdf](docs/planning/master-backlog-sprint-3.pdf) | Sprint 3 version |
+| MoSCoW Prioritisation | Aman | [docs/planning/moscow-prioritisation.md](docs/planning/moscow-prioritisation.md) | Complete |
+| Sprint 1 Plan | Ada | [docs/planning/sprint-1-week-1-plan.md](docs/planning/sprint-1-week-1-plan.md) | Complete |
+| Gantt Chart | Aman | [docs/planning/gantt-chart.png](docs/planning/gantt-chart.png) | Complete |
+| Sprint 1 Checklist | Aman | [docs/planning/sprint-1-checklist.png](docs/planning/sprint-1-checklist.png) | Complete |
+| Sprint 2 Checklist | Aman | [docs/planning/sprint-2-checklist.png](docs/planning/sprint-2-checklist.png) | Complete |
+| Meeting Notes (4 Nov) | Joshua | [docs/meetings/meeting-notes-04-11-2026.docx](docs/meetings/meeting-notes-04-11-2026.docx) | Complete |
+| Contribution Matrix | Joshua | [docs/assessment/contributions-matrix-draft.docx](docs/assessment/contributions-matrix-draft.docx) | Pending group agreement and signatures (#9) |
+| Kanban Board: Sprint 1 | Joshua | [GitHub Project 4](https://github.com/users/J-Colman/projects/4) | Complete |
+| Kanban Board: Sprint 2 | Joshua, Ada | [GitHub Project 6](https://github.com/users/J-Colman/projects/6) | Complete |
+| Kanban Board: Sprint 3 | Joshua, Ada | [GitHub Project 7](https://github.com/users/J-Colman/projects/7) | In progress |
+| README | Joshua | [README.md](README.md) | Updated |
 
 ---
 
 ## Project Management
 
-- [Kanban Board](https://github.com/users/J-Colman/projects/4)
-- [Scope and Functionality Confirmation](docs/planning/scope.md)
-- [Traceability Matrix](docs/analysis/traceability.md)
+- [Kanban Board - Sprint 1](https://github.com/users/J-Colman/projects/4)
+- [Kanban Board - Sprint 2](https://github.com/users/J-Colman/projects/6)
+- [Kanban Board - Sprint 3](https://github.com/users/J-Colman/projects/7)
+- [Traceability Matrix](docs/analysis/traceability-matrix.docx)
+- [Contribution Matrix](docs/assessment/contributions-matrix-draft.docx)
 - [Gantt Chart](docs/planning/gantt-chart.png)
-- [Sprint 1 Plan](docs/planning/sprint-1-week-1-plan.md)
-- [Master Backlog](docs/planning/master-backlog.odt)
+- [Master Backlog](docs/planning/master-backlog-sprint-3.pdf)
 
 ---
 
-## Getting Started
+## Process Automation
 
-### Prerequisites
+F1 and F2 run on Camunda 8 (SaaS cluster). User tasks are completed in Tasklist and service tasks are handled by Python job workers in `automation/`.
 
-- [uv](https://docs.astral.sh/uv/) (manages Python 3.12 and dependencies)
-- Camunda 8.10 Web Modeler is used for BPMN modelling. Access is via the module Camunda organisation
+**Deploy order** (Web Modeler, same cluster): Authenticate Customer sub-process -> delivery-options DMN -> forms -> F1 -> F2.
 
-### Python Environment
+### Running the job workers
+
+Requires Python 3.12+ and client credentials for the cluster (Camunda Console -> cluster -> API -> Create client).
 
 ```bash
-uv sync                      # creates .venv with the exact locked versions
-uv add <package>             # add a dependency (never use pip install)
-uv run <command>             # run a command inside the environment
-
+python3 -m venv .venv
+source .venv/bin/activate # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+cp automation/.env.example automation/.env # env.example is your own filename e.g. josh-colman.env.sh
+python automation/main.py
 ```
 
----
+Required environment variables: `CAMUNDA_REST_ADDRESS`, `CAMUNDA_CLIENT_ID`, `CAMUNDA_CLIENT_SECRET`, `CAMUNDA_OAUTH_URL`, `CAMUNDA_TOKEN_AUDIENCE`. Never commit `.env`.
 
-## Commit Conventions
+### Job types
 
-- **Commit your own work.** Each member should push their own artefacts so the commit history reflects individual contribution.
-- **If you commit someone else’s file**, credit them as a co-author:
-  ```text
-  Co-authored-by: Name <email>
-  ```
-- Keep commits small and focused. One artefact or logical change per commit, don’t dump everything into one final commit.
-- Use clear prefixes:
-  - `docs`: documentation, analysis, plans and models
-  - `feat`: new executable functionality
-  - `fix`: corrections to a model or code
-  - `chore`: repo setup, tooling and cleanup
-- Reference the issue where relevant, for example:
-  ```text
-  docs(analysis): add major process list (#5)
-  docs(planning): add initial product backlog (#6)
-  docs(models): add operational BPMN for case 2
-  ```
-- Commit source artefacts, not just screenshots or exports. For example .bpmn, .md, and the assessment .pdf/.docx files.
-- Never commit .venv, .env, keys, databases or .DS_Store.
-- Push regularly. A steady history is stronger evidence than one large commit at the end.
-- Once a commit is pushed to main, don’t amend or force-push it. Add a follow-up commit instead.
-- Every member should have at least one commit per sprint. Co-author credit is useful, but it is not a substitute for your own commit.
+| Process | Job type | Should return | Implemented |
+|---|---|---|---|
+| Login | `job-check-credentials` | `credentialsValid`, `loginAttempts`, `customerId`, `loggedIn` | Stub |
+| Login | `job-create-account` | `customerId`, `loggedIn` | Stub |
+| F1 | `job-check-stock` | `stockStatus` (`EMPTY`, `PARTIAL` or other), `unavailableItems` | Stub |
+| F1 | `job-show-unavailable-items` | Nothing (shows the unavailable items) | Stub |
+| F1 | `job-identify-producers` | `producers` (list with `name`, `offersDelivery`; feeds the DMN) | Stub |
+| F1 | `job-prepare-order-summary` | `orderSummary` | Stub |
+| F1 | `job-reserve-stock` | `reservationId` (or throws `STOCK_UNAVAILABLE`) | Stub |
+| F1 | `job-create-order` | `orderId` | Stub |
+| F1 | `job-split-by-producer` | `producerOrders` (list with `producer`, `total`) | Stub |
+| F1 | `job-publish-order-ready` | Publishes `OrderReadyForPayment` with `orderId`, `customerId`, `producerOrders` | Stub |
+
+F2 jobs yet to be implemented.
+
+### Running a demo
+1. Start the workers.
+2. Start an instance of F1 from Web Modeler or Operate.
+3. Complete the user tasks in Tasklist. Follow progress and variables in Operate.
+
+### Testing
+`pytest` will run the worker unit tests in `automation/`, but isn't currently implemented.
+
+### Known limitations
+- F2 job workers are not yet implemented.
+- Camunda Forms cannot mask passwords or card numbers, so use test data only. Task 2 handles these in Django.
+- One delivery choice applies to the whole order, not per producer.
 
 ---
 
