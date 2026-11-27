@@ -1,0 +1,36 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.10.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "4c2418b"
+  },
+  "schemaVersion": 19,
+  "id": "form-add-to-basket",
+  "components": [
+    {
+      "label": "Added to basket! What next?",
+      "values": [
+        {
+          "label": "Keep shopping",
+          "value": "shop"
+        },
+        {
+          "label": "Go to checkout",
+          "value": "checkout"
+        }
+      ],
+      "type": "radio",
+      "layout": {
+        "row": "Row_0mgho9j",
+        "columns": null
+      },
+      "id": "Field_0nybpvp",
+      "key": "nextStep",
+      "validate": {
+        "required": true
+      }
+    }
+  ],
+  "type": "default"
+}

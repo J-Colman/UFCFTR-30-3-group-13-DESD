@@ -1,0 +1,27 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.10.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "4c2418b"
+  },
+  "schemaVersion": 19,
+  "id": "form-choose-delivery-option",
+  "components": [
+    {
+      "label": "Choose Delivery Option",
+      "type": "radio",
+      "layout": {
+        "row": "Row_0kcfiik",
+        "columns": null
+      },
+      "id": "Field_18q5rii",
+      "key": "deliveryChoice",
+      "validate": {
+        "required": true
+      },
+      "valuesExpression": "=for o in distinct values(flatten(deliveryOptions)) return {label: upper case(substring(o, 1, 1)) + substring(o, 2), value: o}"
+    }
+  ],
+  "type": "default"
+}

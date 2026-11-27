@@ -1,0 +1,49 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.10.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "4c2418b"
+  },
+  "schemaVersion": 19,
+  "id": "form-review-order",
+  "components": [
+    {
+      "text": "Please review your order",
+      "type": "text",
+      "layout": {
+        "row": "Row_0gx0b74",
+        "columns": null
+      },
+      "id": "Field_11t3ycu"
+    },
+    {
+      "label": "Review Decision",
+      "values": [
+        {
+          "label": "Confirm",
+          "value": "confirm"
+        },
+        {
+          "label": "Amend",
+          "value": "amend"
+        },
+        {
+          "label": "Cancel",
+          "value": "cancel"
+        }
+      ],
+      "type": "radio",
+      "layout": {
+        "row": "Row_04ibysa",
+        "columns": null
+      },
+      "id": "Field_1vxdjfq",
+      "key": "reviewDecision",
+      "validate": {
+        "required": true
+      }
+    }
+  ],
+  "type": "default"
+}

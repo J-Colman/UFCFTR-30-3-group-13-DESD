@@ -1,0 +1,42 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.10.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "4c2418b"
+  },
+  "schemaVersion": 19,
+  "id": "form-login-or-signup",
+  "components": [
+    {
+      "text": "# Do you already have an account?",
+      "type": "text",
+      "layout": {
+        "row": "Row_0pnjzga",
+        "columns": null
+      },
+      "id": "Field_15y304a"
+    },
+    {
+      "label": "Account",
+      "values": [
+        {
+          "label": "I have an account",
+          "value": "existing"
+        },
+        {
+          "label": "I'm new here",
+          "value": "new"
+        }
+      ],
+      "type": "radio",
+      "layout": {
+        "row": "Row_09fhz6t",
+        "columns": null
+      },
+      "id": "Field_0qyhakx",
+      "key": "accountChoice"
+    }
+  ],
+  "type": "default"
+}

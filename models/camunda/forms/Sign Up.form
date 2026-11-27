@@ -1,0 +1,88 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.10.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "4c2418b"
+  },
+  "schemaVersion": 19,
+  "id": "form-signup",
+  "components": [
+    {
+      "text": "# Sign Up",
+      "type": "text",
+      "layout": {
+        "row": "Row_0h3oabz",
+        "columns": null
+      },
+      "id": "Field_1li0ely"
+    },
+    {
+      "label": "First Name",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0c2al7i",
+        "columns": null
+      },
+      "id": "Field_1jt3apw",
+      "key": "fname",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Last Name",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1pfkov6",
+        "columns": null
+      },
+      "id": "Field_18ndkc8",
+      "key": "lname",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Email",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1slpib8",
+        "columns": null
+      },
+      "id": "Field_18c58l4",
+      "key": "email",
+      "validate": {
+        "validationType": "email",
+        "required": true
+      }
+    },
+    {
+      "label": "Password",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1970kvv",
+        "columns": null
+      },
+      "id": "Field_0vw4h4n",
+      "key": "password",
+      "validate": {
+        "required": true,
+        "minLength": "8",
+        "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Za-z0-9]).{8,64}$"
+      },
+      "description": "Must contain atleast one lower case letter, one uppercase letter, one number and one special character"
+    },
+    {
+      "label": "Sign Up",
+      "action": "submit",
+      "type": "button",
+      "layout": {
+        "row": "Row_1vkj3cv",
+        "columns": null
+      },
+      "id": "Field_0k5sr37"
+    }
+  ],
+  "type": "default"
+}

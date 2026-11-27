@@ -1,0 +1,58 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.10.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "4c2418b"
+  },
+  "schemaVersion": 19,
+  "id": "form-login",
+  "components": [
+    {
+      "text": "# Log In",
+      "type": "text",
+      "layout": {
+        "row": "Row_12gvj30",
+        "columns": null
+      },
+      "id": "Field_1jbchw5"
+    },
+    {
+      "label": "Email",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0d7levx",
+        "columns": null
+      },
+      "id": "Field_13ydhlj",
+      "key": "email",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Password",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_001kvu9",
+        "columns": null
+      },
+      "id": "Field_0pb01kq",
+      "key": "password",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Log In",
+      "action": "submit",
+      "type": "button",
+      "layout": {
+        "row": "Row_191bt6g",
+        "columns": null
+      },
+      "id": "Field_1jk6fwb"
+    }
+  ],
+  "type": "default"
+}
