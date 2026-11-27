@@ -107,48 +107,48 @@ UFCFTR-30-3-group-13-DESD/
 
 | Artefact | Owner | Location | Status |
 | --- | --- | --- | --- |
-| Assessment Brief | Module team | [docs/assessment/assessment-brief-task-1.pdf](docs/assessment/assessment-brief-task-1.pdf) | Reference copy |
-| Case Study | Module team | [docs/assessment/case-study.pdf](docs/assessment/case-study.pdf) | Reference copy |
-| Task 1 Use Cases | Module team | [docs/assessment/task-1-use-cases.pdf](docs/assessment/task-1-use-cases.pdf) | Reference copy |
-| Stakeholder Analysis | Izzy | [docs/analysis/stakeholder-analysis.docx](docs/analysis/stakeholder-analysis.docx) | Complete |
+| Assessment Brief | Module team | [docs/assessment/assessment-brief-task-1.pdf](docs/assessment/assessment-brief-task-1.pdf) | 📄 Reference copy |
+| Case Study | Module team | [docs/assessment/case-study.pdf](docs/assessment/case-study.pdf) | 📄 Reference copy |
+| Task 1 Use Cases | Module team | [docs/assessment/task-1-use-cases.pdf](docs/assessment/task-1-use-cases.pdf) | 📄 Reference copy |
+| Stakeholder Analysis | Izzy | [docs/analysis/stakeholder-analysis.docx](docs/analysis/stakeholder-analysis.docx) | ✅ Complete |
 | FR/NFR Analysis (draft) | Izzy | [docs/planning/start on the requirements.docx](<docs/planning/start on the requirements.docx>) | Superseded by the shortened version |
-| FR/NFR Analysis with Test Criteria | Izzy | [docs/planning/start_on_the_requirements_shortened.docx](docs/planning/start_on_the_requirements_shortened.docx) | Complete (#12) |
+| FR/NFR Analysis with Test Criteria | Izzy | [docs/planning/start_on_the_requirements_shortened.docx](docs/planning/start_on_the_requirements_shortened.docx) | ✅ Complete (#12) |
 | Scope and Functionality Confirmation | Joshua | [docs/planning/scope.md](docs/planning/scope.md) | Confirmed with module team (#11) |
-| Major Process List | Yonas | — | Not delivered (#5) |
+| Major Process List | Yonas | — | ❌ Not delivered (#5) |
 | Traceability Matrix | Joshua | [docs/analysis/traceability-matrix.docx](docs/analysis/traceability-matrix.docx) | Sprint 2 version (#20) |
-| i\* Strategic Dependency Model | Yonas | [models/istar/Goal_Diagram_i\*SD1_Model_Case_2.pdf](<models/istar/Goal_Diagram_i*SD1_Model_Case_2.pdf>) | Complete |
-| i\* Strategic Dependency Source (piStar) | Yonas | [models/istar/brfn-istar-SD1.text](models/istar/brfn-istar-SD1.text) | Complete |
-| i\* Strategic Rationale Model | Yonas | [models/istar/Goal_Diagram_i\*SR1_Model_Case_2.pdf](<models/istar/Goal_Diagram_i*SR1_Model_Case_2.pdf>) | Complete |
-| i\* Strategic Rationale Source (piStar) | Yonas | [models/istar/brfn-istar-SR1.text](models/istar/brfn-istar-SR1.text) | Complete |
-| Strategic BPMN | Ada | [models/camunda/bpmn/strategic-bpmn.bpmn](models/camunda/bpmn/strategic-bpmn.bpmn) | Complete (#4) |
-| Strategic BPMN Image | Ada | [models/camunda/bpmn/strategic-bpmn.png](models/camunda/bpmn/strategic-bpmn.png) | Complete |
+| i\* Strategic Dependency Model | Yonas | [models/istar/Goal_Diagram_i\*SD1_Model_Case_2.pdf](<models/istar/Goal_Diagram_i*SD1_Model_Case_2.pdf>) | ✅ Complete |
+| i\* Strategic Dependency Source (piStar) | Yonas | [models/istar/brfn-istar-SD1.text](models/istar/brfn-istar-SD1.text) | ✅ Complete |
+| i\* Strategic Rationale Model | Yonas | [models/istar/Goal_Diagram_i\*SR1_Model_Case_2.pdf](<models/istar/Goal_Diagram_i*SR1_Model_Case_2.pdf>) | ✅ Complete |
+| i\* Strategic Rationale Source (piStar) | Yonas | [models/istar/brfn-istar-SR1.text](models/istar/brfn-istar-SR1.text) | ✅ Complete |
+| Strategic BPMN | Ada | [models/camunda/bpmn/strategic-bpmn.bpmn](models/camunda/bpmn/strategic-bpmn.bpmn) | ✅ Complete (#4) |
+| Strategic BPMN Image | Ada | [models/camunda/bpmn/strategic-bpmn.png](models/camunda/bpmn/strategic-bpmn.png) | ✅ Complete |
 | Operational BPMN F1: Checkout | Joshua, Yonas | [models/camunda/bpmn/operational-bpmn-f1-checkout.bpmn](models/camunda/bpmn/operational-bpmn-f1-checkout.bpmn) | Deployed and tested in Camunda |
-| Operational BPMN F1 Image | Joshua, Yonas | [models/camunda/bpmn/operational-bpmn-f1-checkout.png](models/camunda/bpmn/operational-bpmn-f1-checkout.png) | Complete |
-| Operational BPMN F2: Payment | Joshua, Izzy | [models/camunda/bpmn/operational-bpmn-f2-payment.bpmn](models/camunda/bpmn/operational-bpmn-f2-payment.bpmn) | Modelled; workers in progress |
-| Operational BPMN F2 Image | Joshua, Izzy | [models/camunda/bpmn/operational-bpmn-f2-payment.png](models/camunda/bpmn/operational-bpmn-f2-payment.png) | Complete |
+| Operational BPMN F1 Image | Joshua, Yonas | [models/camunda/bpmn/operational-bpmn-f1-checkout.png](models/camunda/bpmn/operational-bpmn-f1-checkout.png) | ✅ Complete |
+| Operational BPMN F2: Payment | Joshua, Izzy | [models/camunda/bpmn/operational-bpmn-f2-payment.bpmn](models/camunda/bpmn/operational-bpmn-f2-payment.bpmn) | 🟡 Modelled; workers in progress |
+| Operational BPMN F2 Image | Joshua, Izzy | [models/camunda/bpmn/operational-bpmn-f2-payment.png](models/camunda/bpmn/operational-bpmn-f2-payment.png) | ✅ Complete |
 | Authenticate Customer Sub-process | Joshua | [models/camunda/bpmn/sub-processes/bpmn-authenticate-customer.bpmn](models/camunda/bpmn/sub-processes/bpmn-authenticate-customer.bpmn) | Deployed and tested in Camunda |
-| Authenticate Customer Image | Joshua | [models/camunda/bpmn/sub-processes/bpmn-authenticate-customer.png](models/camunda/bpmn/sub-processes/bpmn-authenticate-customer.png) | Complete |
+| Authenticate Customer Image | Joshua | [models/camunda/bpmn/sub-processes/bpmn-authenticate-customer.png](models/camunda/bpmn/sub-processes/bpmn-authenticate-customer.png) | ✅ Complete |
 | Delivery Options Decision (DMN) | Joshua | [models/camunda/dmn/delivery-options-table.dmn](models/camunda/dmn/delivery-options-table.dmn) | Deployed and tested in Camunda |
-| Camunda Forms (11) | Aman, Joshua | [models/camunda/forms/](models/camunda/forms/) | Complete |
-| Job Workers | Ada, Aman | [automation/workers.py](automation/workers.py) | F1 and login in progress; F2 in progress |
-| Worker Entry Point | Ada, Aman, Joshua | [automation/main.py](automation/main.py) | Complete |
-| Worker Tests | Ada, Aman | [automation/test_workers.py](automation/test_workers.py) | In progress |
-| Python Dependencies | Ada, Aman | [requirements.txt](requirements.txt) | Complete |
-| UML Use Case Diagram | Yonas | [models/uml/case-2-use-case-diagram.pdf](models/uml/case-2-use-case-diagram.pdf) | Complete |
-| UML Class Diagram | Yonas | [models/uml/case-2-class-diagram.pdf](models/uml/case-2-class-diagram.pdf) | Complete |
-| UML Component Diagram | Yonas | [models/uml/case-2-component-diagram.pdf](models/uml/case-2-component-diagram.pdf) | Complete |
-| UML Sequence Diagram | Yonas | [models/uml/case-2-sequence-diagram.pdf](models/uml/case-2-sequence-diagram.pdf) | Complete |
+| Camunda Forms (11) | Aman, Joshua | [models/camunda/forms/](models/camunda/forms/) | ✅ Complete |
+| Job Workers | Ada, Aman | [automation/workers.py](automation/workers.py) | 🟡 F1 and login in progress; 🟡 F2 in progress |
+| Worker Entry Point | Ada, Aman, Joshua | [automation/main.py](automation/main.py) | ✅ Complete |
+| Worker Tests | Ada, Aman | [automation/test_workers.py](automation/test_workers.py) | 🟡 In progress |
+| Python Dependencies | Ada, Aman | [requirements.txt](requirements.txt) | ✅ Complete |
+| UML Use Case Diagram | Yonas | [models/uml/case-2-use-case-diagram.pdf](models/uml/case-2-use-case-diagram.pdf) | ✅ Complete |
+| UML Class Diagram | Yonas | [models/uml/case-2-class-diagram.pdf](models/uml/case-2-class-diagram.pdf) | ✅ Complete |
+| UML Component Diagram | Yonas | [models/uml/case-2-component-diagram.pdf](models/uml/case-2-component-diagram.pdf) | ✅ Complete |
+| UML Sequence Diagram | Yonas | [models/uml/case-2-sequence-diagram.pdf](models/uml/case-2-sequence-diagram.pdf) | ✅ Complete |
 | Master Backlog | Aman, Joshua | [docs/planning/master-backlog-sprint-3.pdf](docs/planning/master-backlog-sprint-3.pdf) | Sprint 3 version |
-| MoSCoW Prioritisation | Aman | [docs/planning/moscow-prioritisation.md](docs/planning/moscow-prioritisation.md) | Complete |
-| Sprint 1 Plan | Ada | [docs/planning/sprint-1-week-1-plan.md](docs/planning/sprint-1-week-1-plan.md) | Complete |
-| Gantt Chart | Aman | [docs/planning/gantt-chart.png](docs/planning/gantt-chart.png) | Complete |
-| Sprint 1 Checklist | Aman | [docs/planning/sprint-1-checklist.png](docs/planning/sprint-1-checklist.png) | Complete |
-| Sprint 2 Checklist | Aman | [docs/planning/sprint-2-checklist.png](docs/planning/sprint-2-checklist.png) | Complete |
-| Meeting Notes (4 Nov) | Joshua | [docs/meetings/meeting-notes-04-11-2026.docx](docs/meetings/meeting-notes-04-11-2026.docx) | Complete |
+| MoSCoW Prioritisation | Aman | [docs/planning/moscow-prioritisation.md](docs/planning/moscow-prioritisation.md) | ✅ Complete |
+| Sprint 1 Plan | Ada | [docs/planning/sprint-1-week-1-plan.md](docs/planning/sprint-1-week-1-plan.md) | ✅ Complete |
+| Gantt Chart | Aman | [docs/planning/gantt-chart.png](docs/planning/gantt-chart.png) | ✅ Complete |
+| Sprint 1 Checklist | Aman | [docs/planning/sprint-1-checklist.png](docs/planning/sprint-1-checklist.png) | ✅ Complete |
+| Sprint 2 Checklist | Aman | [docs/planning/sprint-2-checklist.png](docs/planning/sprint-2-checklist.png) | ✅ Complete |
+| Meeting Notes (4 Nov) | Joshua | [docs/meetings/meeting-notes-04-11-2026.docx](docs/meetings/meeting-notes-04-11-2026.docx) | ✅ Complete |
 | Contribution Matrix | Joshua | [docs/assessment/contributions-matrix-draft.docx](docs/assessment/contributions-matrix-draft.docx) | Pending group agreement and signatures (#9) |
-| Kanban Board: Sprint 1 | Joshua | [GitHub Project 4](https://github.com/users/J-Colman/projects/4) | Complete |
-| Kanban Board: Sprint 2 | Joshua, Ada | [GitHub Project 6](https://github.com/users/J-Colman/projects/6) | Complete |
-| Kanban Board: Sprint 3 | Joshua, Ada | [GitHub Project 7](https://github.com/users/J-Colman/projects/7) | In progress |
+| Kanban Board: Sprint 1 | Joshua | [GitHub Project 4](https://github.com/users/J-Colman/projects/4) | ✅ Complete |
+| Kanban Board: Sprint 2 | Joshua, Ada | [GitHub Project 6](https://github.com/users/J-Colman/projects/6) | ✅ Complete |
+| Kanban Board: Sprint 3 | Joshua, Ada | [GitHub Project 7](https://github.com/users/J-Colman/projects/7) | 🟡 In progress |
 | README | Joshua | [README.md](README.md) | Updated |
 
 ---
